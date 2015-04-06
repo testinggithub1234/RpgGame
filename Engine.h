@@ -7,7 +7,6 @@
 #include "Level.h"
 #include "Player.h"
 
-
 class Engine {
 private:
     std::shared_ptr<sf::RenderWindow> window;

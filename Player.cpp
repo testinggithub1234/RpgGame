@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Level.h"
+#include "Collision.h"
 
 void Player::Init(sf::Vector2f pos) {
     sprite.setSize(sf::Vector2f(32, 32));
@@ -10,20 +12,29 @@ void Player::Update() {
     boundingBox = sprite.getGlobalBounds();
 }
 
-void Player::Execute(sf::Keyboard::Key key) {
+void Player::Execute(sf::Keyboard::Key key, Level level) {
+    int x = 0, y = 0;
+
     if (clock.getElapsedTime().asMilliseconds() >= 100) {
         if (key == sf::Keyboard::Down) {
-            sprite.move(0, 32);
+            y = 32;
         }
         else if (key == sf::Keyboard::Up) {
-            sprite.move(0, -32);
+            y = -32;
         }
         else if (key == sf::Keyboard::Left) {
-            sprite.move(-32, 0);
+            x = -32;
         }
         else if (key == sf::Keyboard::Right) {
-            sprite.move(32, 0);
+            x = 32;
         }
+
+        sprite.move(x, y);
+
+        if (isPlayerCollidingWithObjects(getPosition(), level)) {
+            sprite.move(-x, -y);
+        }
+
         clock.restart();
     }
 }

@@ -20,11 +20,10 @@ bool Engine::Init() {
 }
 
 void Engine::RenderFrame() {
-    window->clear();
+    window->clear();///Don't forget to add a color
     window->draw(map);
     window->draw(player);
     window->display();
-    showFps();
 }
 
 void Engine::ProcessInput() {
@@ -38,7 +37,7 @@ void Engine::ProcessInput() {
             if (event.key.code == sf::Keyboard::Escape) {
                 window->close();
             }
-            player.Execute(event.key.code);
+            player.Execute(event.key.code, level);
         }
     }
 }

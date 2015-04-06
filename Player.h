@@ -2,6 +2,7 @@
 #define RPGGAME_PLAYER_H
 
 #include <SFML/Graphics.hpp>
+#include "Level.h"
 
 class Player : public sf::Drawable {
 public:
@@ -13,7 +14,7 @@ public:
 
     void Update();
 
-    void Execute(sf::Keyboard::Key key);
+    void Execute(sf::Keyboard::Key key, Level level);
 
     sf::Vector2f getPosition();
 
