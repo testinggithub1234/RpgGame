@@ -20,7 +20,7 @@ bool Engine::Init() {
 }
 
 void Engine::RenderFrame() {
-    window->clear();///Don't forget to add a color
+    window->clear(sf::Color(64, 164, 223));///Don't forget to add a color
     window->draw(map);
     window->draw(player);
     window->display();

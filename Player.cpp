@@ -4,7 +4,7 @@
 
 void Player::Init(sf::Vector2f pos) {
     sprite.setSize(sf::Vector2f(32, 32));
-    sprite.setFillColor(sf::Color::Blue);
+    sprite.setFillColor(sf::Color(196, 0, 0));
     sprite.setPosition(pos);
 }
 
