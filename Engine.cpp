@@ -15,11 +15,7 @@ bool Engine::Init() {
     player.Init(level.playerPos);
     playerView.reset(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
     playerView.setCenter(player.getPosition());
-    int n;
-    n = 3;
-    if (n != 3){
-        std::cout << 's';
-    }
+
     return !!window;
 }
 
