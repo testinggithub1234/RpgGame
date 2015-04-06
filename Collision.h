@@ -6,7 +6,13 @@
 #include "Level.h"
 
 bool isPlayerCollidingWithObjects(sf::Vector2f playerPos, Level level) {
-    return playerPos.x < 0 or playerPos.y < 0 or playerPos.x / 32 >= level.width or playerPos.y / 32 >= level.height;
+    if(playerPos.x < 0 or playerPos.y < 0  or playerPos.x / 32 >= level.width or playerPos.y / 32 >= level.height){
+        return true;
+    }
+
+    if(level.solidObjects[playerPos.x / 32 + playerPos.y / 32 * level.width] == true){
+        return true;
+    }
 }
 
 
