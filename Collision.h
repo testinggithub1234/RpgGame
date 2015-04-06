@@ -15,5 +15,8 @@ bool isPlayerCollidingWithObjects(sf::Vector2f playerPos, Level level) {
     }
 }
 
+bool isPlayerCollidingWithNpcs(){
+
+}
 
 #endif //RPGGAME_COLLISION_H
