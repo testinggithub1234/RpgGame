@@ -11,18 +11,7 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295f409c-5668-451c-a784-add94f661aca" name="Default" comment="First commit">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EntityManager.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/EntityManager.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Npc.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Npc.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Collision.h" afterPath="$PROJECT_DIR$/Collision.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine.cpp" afterPath="$PROJECT_DIR$/Engine.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine.h" afterPath="$PROJECT_DIR$/Engine.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Player.cpp" afterPath="$PROJECT_DIR$/Player.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Player.h" afterPath="$PROJECT_DIR$/Player.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TileMap.h" afterPath="$PROJECT_DIR$/TileMap.h" />
+    <list default="true" id="295f409c-5668-451c-a784-add94f661aca" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="RpgGame.iws" />
@@ -351,7 +340,13 @@
       <option name="project" value="LOCAL" />
       <updated>1428349477894</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="First commit">
+      <created>1428420672115</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1428420672115</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
