@@ -7,14 +7,16 @@ Engine::Engine() {
 
 bool Engine::Init() {
     std::shared_ptr<sf::RenderWindow> initWindow(new sf::RenderWindow(sf::VideoMode(800, 600, 32), "RPG"));
-
     window = initWindow;
+
     level.LoadLevel("level");
     map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height);
 
-    player.Init(level.playerPos);
+    player.Init(level.playerPos, sf::Vector2f(32, 32), "Resources/player.png");
+    entities.Init();
+
     playerView.reset(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
-    playerView.setCenter(player.getPosition());
+    playerView.setCenter(player.getPixelPosition());
 
     return !!window;
 }
@@ -22,6 +24,7 @@ bool Engine::Init() {
 void Engine::RenderFrame() {
     window->clear(sf::Color(64, 164, 223));///Don't forget to add a color
     window->draw(map);
+    window->draw(entities);
     window->draw(player);
     window->display();
 }
@@ -45,7 +48,7 @@ void Engine::ProcessInput() {
 void Engine::Update() {
     player.Update();
 
-    playerView.setCenter(player.getPosition());
+    playerView.setCenter(player.getPixelPosition());
     window->setView(playerView);
 }
 

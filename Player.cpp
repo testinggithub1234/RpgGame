@@ -1,10 +1,10 @@
 #include "Player.h"
-#include "Level.h"
 #include "Collision.h"
 
-void Player::Init(sf::Vector2f pos) {
-    sprite.setSize(sf::Vector2f(32, 32));
-    sprite.setFillColor(sf::Color(196, 0, 0));
+void Player::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
+    texture.loadFromFile(texLocation);
+    sprite.setSize(size);
+    sprite.setTexture(&texture);
     sprite.setPosition(pos);
 }
 
@@ -15,20 +15,19 @@ void Player::Update() {
 void Player::Execute(sf::Keyboard::Key key, Level level) {
     int x = 0, y = 0;
 
-    if (clock.getElapsedTime().asMilliseconds() >= 100) {
+    if (clock.getElapsedTime().asMilliseconds() >= 80) {
         if (key == sf::Keyboard::Down) {
-            y = 32;
+            y += 32;
         }
         else if (key == sf::Keyboard::Up) {
-            y = -32;
+            y += -32;
         }
         else if (key == sf::Keyboard::Left) {
-            x = -32;
+            x += -32;
         }
         else if (key == sf::Keyboard::Right) {
-            x = 32;
+            x += 32;
         }
-
         sprite.move(x, y);
 
         if (isPlayerCollidingWithObjects(getPosition(), level)) {
@@ -40,6 +39,10 @@ void Player::Execute(sf::Keyboard::Key key, Level level) {
 }
 
 sf::Vector2f Player::getPosition() {
+    return sf::Vector2f(sprite.getPosition().x / sprite.getSize().x, sprite.getPosition().y / sprite.getSize().y);
+}
+
+sf::Vector2f Player::getPixelPosition() {
     return sprite.getPosition();
 }
 

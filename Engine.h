@@ -6,8 +6,14 @@
 #include "TileMap.h"
 #include "Level.h"
 #include "Player.h"
+#include "EntityManager.h"
 
 class Engine {
+public:
+    Engine();
+
+    void Go();
+
 private:
     std::shared_ptr<sf::RenderWindow> window;
 
@@ -21,19 +27,16 @@ private:
 
     void Update();
 
+    Player player;
+
+    EntityManager entities;
+
     TileMap map;
 
     Level level;
 
     sf::View playerView;
 
-public:
-    Engine();
-
-    Player player;
-
-    void Go();
 };
-
 
 #endif //RPGGAME_ENGINE_H

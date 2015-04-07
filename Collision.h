@@ -10,7 +10,7 @@ bool isPlayerCollidingWithNpcs() {
 }
 
 bool isPlayerCollidingWithObjects(sf::Vector2f playerPos, Level level) {
-    if (playerPos.x < 0 or playerPos.y < 0 or playerPos.x / 32 >= level.width or playerPos.y / 32 >= level.height) {
+    if (playerPos.x < 0 or playerPos.y < 0 or playerPos.x >= level.width or playerPos.y >= level.height) {
         return true;
     }
 
@@ -18,7 +18,7 @@ bool isPlayerCollidingWithObjects(sf::Vector2f playerPos, Level level) {
         return true;
     }
 
-    return level.solidObjects[playerPos.x / 32 + playerPos.y / 32 * level.width] == true;
+    return level.solidObjects[playerPos.x + playerPos.y * level.width] == true;
 
 }
 
