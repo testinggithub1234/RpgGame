@@ -13,3 +13,4 @@ void EntityManager::draw(sf::RenderTarget &target, sf::RenderStates states) cons
 void EntityManager::Init() {
 
 }
+

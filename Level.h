@@ -10,7 +10,7 @@ public:
     std::vector<int> map;
     std::vector<bool> solidObjects;
 
-    sf::Vector2f playerPos;
+    sf::Vector2f playerPos;///Players starting position
     unsigned int width, height;
 
     void LoadLevel(std::string lev);
