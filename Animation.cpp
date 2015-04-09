@@ -7,11 +7,10 @@ MovementAnimation::MovementAnimation() {
 
 void MovementAnimation::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
     stopped = true;
-    texture.loadFromFile(texLocation);
-    texture.setSmooth(false);
 
     position = pos;
     this->size = size;
+    textureLocation = texLocation;
 
     Update(pos);
     frame = 0;
@@ -25,7 +24,7 @@ void MovementAnimation::PushFrame(int left, int top, int width, int height) {
     subRect.height = height;
 
     sf::RectangleShape sprite;
-    sprite.setTexture(&texture);
+    sprite.setTexture(&texture.getTexture(textureLocation));
     sprite.setTextureRect(subRect);
     sprite.setPosition(position);
     sprite.setSize(size);

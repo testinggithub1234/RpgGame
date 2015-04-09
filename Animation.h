@@ -3,6 +3,7 @@
 
 
 #include <SFML/Graphics.hpp>
+#include "TextureManager.h"
 
 class MovementAnimation : public sf::Drawable {
 public:
@@ -21,13 +22,16 @@ public:
     void Update(sf::Vector2f pos);
 
 private:
-    sf::Texture texture;
+    std::string textureLocation;
+
     std::vector<sf::RectangleShape> sprites;
 
     sf::Vector2f position, size;
 
     sf::Clock clock;
     int frame;
+
+    TextureManager texture;
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };

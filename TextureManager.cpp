@@ -16,7 +16,7 @@ sf::Texture &TextureManager::getTexture(const std::string &texLocation) {
 
     if(texture.loadFromFile(texLocation)) {
         textures[texLocation] = texture;
-        std::cout << "DEBUG_MESSAGE: loading image.\n";
+        std::cout << "DEBUG_MESSAGE: loading image: "<< texLocation << "\n";
         return  textures[texLocation];
     }
 
