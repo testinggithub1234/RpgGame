@@ -35,7 +35,7 @@ private:
     sf::Clock clock;
 
     enum Movement{up, down, right, left};
-    Movement movement;
+    Movement move;
 
     MovementAnimation moveDown;
     MovementAnimation moveUp;

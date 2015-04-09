@@ -17,9 +17,8 @@ bool isPlayerCollidingWithObjects(sf::Vector2f playerPos, Level level) {
     if (isPlayerCollidingWithNpcs()) {
         return true;
     }
-    std::cout<<playerPos.x<<" "<<playerPos.y<<std::endl;
-    return level.solidObjects[playerPos.x + playerPos.y * level.width] == true;
 
+    return level.solidObjects[playerPos.x + playerPos.y * level.width] == true;
 }
 
 

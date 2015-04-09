@@ -7,7 +7,6 @@ void Player::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) 
     sprite.setTexture(&texture);
     sprite.setPosition(pos);
 
-
     moveUp.Init(getPixelPosition(), getSize(), "Resources/avatar.png");
     moveDown.Init(getPixelPosition(), getSize(), "Resources/avatar.png");
     moveLeft.Init(getPixelPosition(), getSize(), "Resources/avatar.png");
@@ -25,7 +24,7 @@ void Player::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) 
     moveRight.PushFrame(10, 0, 32, 38);
     moveRight.PushFrame(11, 0, 32, 38);
 
-    movement = down;
+    move = down;
 }
 
 void Player::Update() {
@@ -38,39 +37,33 @@ void Player::Update() {
 
 void Player::Execute(sf::Keyboard::Key key, Level level) {
     int x = 0, y = 0;
-    bool moved = false;
 
     if (clock.getElapsedTime().asMilliseconds() >= 80) {
         if (key == sf::Keyboard::Down) {
             y += 32;
-            movement = down;
-            moved = true;
+            move = down;
+            moveDown.Start();
         }
         else if (key == sf::Keyboard::Up) {
             y += -32;
-            movement = up;
-            moved = true;
+            move = up;
+            moveUp.Start();
         }
         else if (key == sf::Keyboard::Left) {
             x += -32;
-            movement = left;
-            moved = true;
+            move = left;
+            moveLeft.Start();
         }
         else if (key == sf::Keyboard::Right) {
             x += 32;
-            movement = right;
-            moved = true;
+            move = right;
+            moveRight.Start();
         }
         sprite.move(x, y);
 
         if (isPlayerCollidingWithObjects(getPosition(), level)) {
             sprite.move(-x, -y);
-            moved = false;
         }
-        moveUp.Start();
-        moveDown.Start();
-        moveRight.Start();
-        moveLeft.Start();
 
         clock.restart();
     }
@@ -96,7 +89,7 @@ void Player::Stop() {
 }
 
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    switch (movement) {
+    switch (move) {
         case up :
             target.draw(moveUp, states);
             break;
