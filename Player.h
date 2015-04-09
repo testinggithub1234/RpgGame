@@ -35,10 +35,10 @@ private:
     enum Movement{up, down, right, left};
     Movement move;
 
-    MovementAnimation moveDown;
-    MovementAnimation moveUp;
-    MovementAnimation moveLeft;
-    MovementAnimation moveRight;
+    Animation moveDown;
+    Animation moveUp;
+    Animation moveLeft;
+    Animation moveRight;
 };
 
 

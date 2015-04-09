@@ -12,7 +12,7 @@ void Level::LoadLevel(std::string lev) {
     }
 
     readLevel >> playerPos.x >> playerPos.y;
-    playerPos.x *= 32;// Pixeli
+    playerPos.x *= 32;// Pixels
     playerPos.y *= 32;
 
     std::vector<int> solidObjectsList;

@@ -1,13 +1,13 @@
-#ifndef RPGGAME_MOVEMENTANIMATION_H
-#define RPGGAME_MOVEMENTANIMATION_H
+#ifndef RPGGAME_ANIMATION_H
+#define RPGGAME_ANIMATION_H
 
 
 #include <SFML/Graphics.hpp>
 #include "TextureManager.h"
 
-class MovementAnimation : public sf::Drawable {
+class Animation : public sf::Drawable {
 public:
-    MovementAnimation();
+    Animation();
 
     bool stopped;
 

@@ -1,11 +1,11 @@
 #include <iostream>
 #include "Animation.h"
 
-MovementAnimation::MovementAnimation() {
+Animation::Animation() {
 
 }
 
-void MovementAnimation::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
+void Animation::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
     stopped = true;
 
     position = pos;
@@ -16,7 +16,7 @@ void MovementAnimation::Init(sf::Vector2f pos, sf::Vector2f size, std::string te
     frame = 0;
 }
 
-void MovementAnimation::PushFrame(int left, int top, int width, int height) {
+void Animation::PushFrame(int left, int top, int width, int height) {
     sf::IntRect subRect;
     subRect.left = left * width;
     subRect.top = top * height;
@@ -32,7 +32,7 @@ void MovementAnimation::PushFrame(int left, int top, int width, int height) {
     sprites.push_back(sprite);
 }
 
-void MovementAnimation::Update(sf::Vector2f pos) {
+void Animation::Update(sf::Vector2f pos) {
     for(int i = 0; i < sprites.size();i++)
         sprites[i].setPosition(pos);
 
@@ -50,18 +50,19 @@ void MovementAnimation::Update(sf::Vector2f pos) {
     }
 }
 
-void MovementAnimation::Start() {
+void Animation::Start() {
     if(stopped){
         frame = 1;
         stopped = false;
     }
 }
 
-void MovementAnimation::Stop() {
+void Animation::Stop() {
     stopped = true;
+    clock.restart();
 }
 
-void MovementAnimation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+void Animation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(sprites[frame], states);
 }
 
