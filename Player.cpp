@@ -4,7 +4,6 @@
 void Player::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
     texture.loadFromFile(texLocation);
     sprite.setSize(size);
-    sprite.setTexture(&texture);
     sprite.setPosition(pos);
 
     moveUp.Init(getPixelPosition(), getSize(), "Resources/avatar.png");
