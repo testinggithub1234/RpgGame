@@ -9,7 +9,7 @@ int main() {
     try{
         engine->Go();
     }
-    catch(char* end){
+    catch(char* e){
         return EXIT_FAILURE;
     }
 

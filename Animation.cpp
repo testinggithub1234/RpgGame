@@ -36,7 +36,7 @@ void Animation::Update(sf::Vector2f pos) {
     for(int i = 0; i < sprites.size();i++)
         sprites[i].setPosition(pos);
 
-    if (clock.getElapsedTime().asMilliseconds() > 500) {
+    if (clock.getElapsedTime().asMilliseconds() > 200) {
         if (frame < sprites.size() - 1)
             frame++;
         else

@@ -7,10 +7,14 @@ Engine::Engine() {
 
 bool Engine::Init() {
     std::shared_ptr<sf::RenderWindow> initWindow(new sf::RenderWindow(sf::VideoMode(800, 600, 32), "RPG"));
+
     window = initWindow;
+    window->setVerticalSyncEnabled(true);
+    window->setFramerateLimit(60);
 
     level.LoadLevel("level");
-    map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height);
+    if (!map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height))
+        return false;
 
     player.Init(level.playerPos, sf::Vector2f(32, 32), "Resources/avatar.png");
     entities.Init();
