@@ -9,11 +9,12 @@ void MovementAnimation::Init(sf::Vector2f pos, sf::Vector2f size, std::string te
     stopped = true;
     texture.loadFromFile(texLocation);
     texture.setSmooth(false);
-    sprite.setTexture(&texture);
-    sprite.setPosition(pos);
-    sprite.setSize(size);
+
+    position = pos;
+    this->size = size;
 
     Update(pos);
+    frame = 0;
 }
 
 void MovementAnimation::PushFrame(int left, int top, int width, int height) {
@@ -22,19 +23,28 @@ void MovementAnimation::PushFrame(int left, int top, int width, int height) {
     subRect.top = top * height;
     subRect.width = width;
     subRect.height = height;
-    tex.push_back(subRect);
-    sprite.setTextureRect(tex[0]);
+
+    sf::RectangleShape sprite;
+    sprite.setTexture(&texture);
+    sprite.setTextureRect(subRect);
+    sprite.setPosition(position);
+    sprite.setSize(size);
+
+    sprites.push_back(sprite);
 }
 
 void MovementAnimation::Update(sf::Vector2f pos) {
-    sprite.setPosition(pos);
+    for(int i = 0; i < sprites.size();i++)
+        sprites[i].setPosition(pos);
+
     if (clock.getElapsedTime().asMilliseconds() > 500) {
-        if (frame < tex.size() - 1)
+        if (frame < sprites.size() - 1)
             frame++;
         else
             frame = 1;
+
         if(stopped){
-            sprite.setTextureRect(tex[0]);
+            frame = 0;
         }
 
         clock.restart();
@@ -42,8 +52,10 @@ void MovementAnimation::Update(sf::Vector2f pos) {
 }
 
 void MovementAnimation::Start() {
-    stopped = false;
-    sprite.setTextureRect(tex[frame]);
+    if(stopped){
+        frame = 1;
+        stopped = false;
+    }
 }
 
 void MovementAnimation::Stop() {
@@ -51,6 +63,6 @@ void MovementAnimation::Stop() {
 }
 
 void MovementAnimation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    target.draw(sprite, states);
+    target.draw(sprites[frame], states);
 }
 

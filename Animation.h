@@ -22,8 +22,10 @@ public:
 
 private:
     sf::Texture texture;
-    std::vector<sf::IntRect> tex;
-    sf::RectangleShape sprite;
+    std::vector<sf::RectangleShape> sprites;
+
+    sf::Vector2f position, size;
+
     sf::Clock clock;
     int frame;
 
