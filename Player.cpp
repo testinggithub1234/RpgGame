@@ -33,33 +33,33 @@ void Player::Update() {
     moveRight.Update(getPixelPosition());
 }
 
-void Player::Execute(sf::Keyboard::Key key, Level level) {
+void Player::Execute(sf::Keyboard::Key key, std::vector<bool> solidObjects, std::vector<Npc> npcList) {
     int x = 0, y = 0;
 
     if (clock.getElapsedTime().asMilliseconds() >= 80) {
         if (key == sf::Keyboard::Down) {
-            y += 32;
+            y = 32;
             move = down;
             moveDown.Start();
         }
         else if (key == sf::Keyboard::Up) {
-            y += -32;
+            y = -32;
             move = up;
             moveUp.Start();
         }
         else if (key == sf::Keyboard::Left) {
-            x += -32;
+            x = -32;
             move = left;
             moveLeft.Start();
         }
         else if (key == sf::Keyboard::Right) {
-            x += 32;
+            x = 32;
             move = right;
             moveRight.Start();
         }
         sprite.move(x, y);
 
-        if (isPlayerCollidingWithObjects(getPosition(), level)) {
+        if (isPlayerCollidingWithObjects(getPosition(), solidObjects, npcList, boundingBox)) {
             sprite.move(-x, -y);
         }
 

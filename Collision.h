@@ -4,21 +4,27 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 #include "Level.h"
+#include "Npc.h"
 
-bool isPlayerCollidingWithNpcs() {
+bool isPlayerCollidingWithNpcs(std::vector<Npc> npcList, sf::FloatRect playerBoundingBox) {
+    for(auto it = npcList.begin(); it != npcList.end();++it){
+        if(playerBoundingBox.intersects(it->boundingBox)){
+            return true;
+        }
+    }
     return false;
 }
 
-bool isPlayerCollidingWithObjects(sf::Vector2f playerPos, Level level) {
-    if (playerPos.x < 0 or playerPos.y < 0 or playerPos.x >= level.width or playerPos.y >= level.height) {
+bool isPlayerCollidingWithObjects(sf::Vector2f playerPos, std::vector<bool> solidObjects, std::vector<Npc> npcList, sf::FloatRect playerBoundingBox) {
+    if (playerPos.x < 0 or playerPos.y < 0 or playerPos.x >= 16 or playerPos.y >= 8) {
         return true;
     }
 
-    if (isPlayerCollidingWithNpcs()) {
+    if(isPlayerCollidingWithNpcs(npcList, playerBoundingBox)){
         return true;
     }
 
-    return level.solidObjects[playerPos.x + playerPos.y * level.width] == true;
+    return solidObjects[playerPos.x + playerPos.y * 16] == true;
 }
 
 

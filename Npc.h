@@ -8,14 +8,17 @@ class Npc : public sf::Drawable {
 public:
     Npc();
 
-    void Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation);
+    sf::FloatRect boundingBox;
 
-    sf::RectangleShape sprite;
+    void Init(sf::Vector2f pos, sf::Vector2f size, sf::Texture &texture);
+
+    void Update();
 
 private:
-    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    sf::RectangleShape sprite;
 
-    sf::Texture texture;
+
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
 

@@ -19,6 +19,8 @@ bool Engine::Init() {
     player.Init(level.playerPos, sf::Vector2f(32, 32), "Resources/avatar.png");
     entities.Init();
 
+    entities.addNpc(sf::Vector2f(3, 0), sf::Vector2f(32,32), "Resources/policeNPC.png");
+
     playerView.reset(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
     playerView.setCenter(player.getPixelPosition());
 
@@ -44,7 +46,7 @@ void Engine::ProcessInput() {
             if (event.key.code == sf::Keyboard::Escape) {
                 window->close();
             }
-            player.Execute(event.key.code, level);
+            player.Execute(event.key.code, level.solidObjects, entities.npcList);
         }
         if (event.type == sf::Event::KeyReleased) {
             player.Stop();
@@ -54,6 +56,7 @@ void Engine::ProcessInput() {
 
 void Engine::Update() {
     player.Update();
+    entities.Update();
 
     playerView.setCenter(player.getPixelPosition());
     window->setView(playerView);
