@@ -12,14 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="295f409c-5668-451c-a784-add94f661aca" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MovementAnimation.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MovementAnimation.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Textures.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Textures.h" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/MovementAnimation.cpp" afterPath="$PROJECT_DIR$/Animation.cpp" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/MovementAnimation.h" afterPath="$PROJECT_DIR$/Animation.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Collision.h" afterPath="$PROJECT_DIR$/Collision.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine.cpp" afterPath="$PROJECT_DIR$/Engine.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Level.cpp" afterPath="$PROJECT_DIR$/Level.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Player.cpp" afterPath="$PROJECT_DIR$/Player.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Player.h" afterPath="$PROJECT_DIR$/Player.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -101,21 +96,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Player.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Player.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.5243902">
+              <caret line="92" column="18" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MovementAnimation.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MovementAnimation.cpp">
+      <file leaf-file-name="Animation.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Animation.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70731705">
-              <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -123,8 +118,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MovementAnimation.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MovementAnimation.h">
+      <file leaf-file-name="Animation.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Animation.h">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
@@ -176,9 +171,9 @@
         <option value="$PROJECT_DIR$/Textures.cpp" />
         <option value="$PROJECT_DIR$/Player.h" />
         <option value="$PROJECT_DIR$/Engine.cpp" />
-        <option value="$PROJECT_DIR$/Player.cpp" />
         <option value="$PROJECT_DIR$/MovementAnimation.h" />
         <option value="$PROJECT_DIR$/MovementAnimation.cpp" />
+        <option value="$PROJECT_DIR$/Player.cpp" />
       </list>
     </option>
   </component>
@@ -386,7 +381,13 @@
       <option name="project" value="LOCAL" />
       <updated>1428424203530</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="First commit">
+      <created>1428593572603</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1428593572603</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -851,15 +852,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Player.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MovementAnimation.h">
+    <entry file="file://$PROJECT_DIR$/Animation.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
@@ -867,13 +860,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MovementAnimation.cpp">
+    <entry file="file://$PROJECT_DIR$/Animation.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70731705">
-          <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Player.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5243902">
+          <caret line="92" column="18" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>

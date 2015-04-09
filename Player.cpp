@@ -88,6 +88,13 @@ sf::Vector2f Player::getSize() {
     return sprite.getSize();
 }
 
+void Player::Stop() {
+    moveDown.Stop();
+    moveUp.Stop();
+    moveLeft.Stop();
+    moveRight.Stop();
+}
+
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     switch (movement) {
         case up :
@@ -105,9 +112,3 @@ void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     }
 }
 
-void Player::Stop() {
-    moveDown.Stop();
-    moveUp.Stop();
-    moveLeft.Stop();
-    moveRight.Stop();
-}

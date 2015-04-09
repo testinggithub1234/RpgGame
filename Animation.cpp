@@ -1,5 +1,5 @@
 #include <iostream>
-#include "MovementAnimation.h"
+#include "Animation.h"
 
 MovementAnimation::MovementAnimation() {
 
@@ -15,11 +15,6 @@ void MovementAnimation::Init(sf::Vector2f pos, sf::Vector2f size, std::string te
 
     Update(pos);
 }
-
-void MovementAnimation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    target.draw(sprite, states);
-}
-
 
 void MovementAnimation::PushFrame(int left, int top, int width, int height) {
     sf::IntRect subRect;
@@ -46,11 +41,16 @@ void MovementAnimation::Update(sf::Vector2f pos) {
     }
 }
 
-void MovementAnimation::Stop() {
-    stopped = true;
-}
-
 void MovementAnimation::Start() {
     stopped = false;
     sprite.setTextureRect(tex[frame]);
 }
+
+void MovementAnimation::Stop() {
+    stopped = true;
+}
+
+void MovementAnimation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(sprite, states);
+}
+

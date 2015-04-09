@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Level.h"
-#include "MovementAnimation.h"
+#include "Animation.h"
 
 class Player : public sf::Drawable {
 public:
