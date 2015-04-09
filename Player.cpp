@@ -5,10 +5,10 @@ void Player::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) 
     sprite.setSize(size);
     sprite.setPosition(pos);
 
-    moveUp.Init(getPixelPosition(), getSize(), "Resources/avatar.png");
-    moveDown.Init(getPixelPosition(), getSize(), "Resources/avatar.png");
-    moveLeft.Init(getPixelPosition(), getSize(), "Resources/avatar.png");
-    moveRight.Init(getPixelPosition(), getSize(), "Resources/avatar.png");
+    moveUp.Init(getPixelPosition(), getSize(), texLocation);
+    moveDown.Init(getPixelPosition(), getSize(), texLocation);
+    moveLeft.Init(getPixelPosition(), getSize(), texLocation);
+    moveRight.Init(getPixelPosition(), getSize(), texLocation);
     moveUp.PushFrame(2, 0, 32, 38);
     moveUp.PushFrame(8, 0, 32, 38);
     moveUp.PushFrame(9, 0, 32, 38);

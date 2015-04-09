@@ -11,8 +11,13 @@ public:
     bool Load(const std::string &tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width,
               unsigned int height) {
         // load the tileset texture
-        if (!m_tileset.loadFromFile(tileset))
+        if (!m_tileset.loadFromFile(tileset)) {
+            std::cout << "GAME_ERROR: Image: "<< tileset << " was not found. It is filled with an empty image.\n";
             return false;
+        }
+        else{
+            std::cout << "DEBUG_MESSAGE: loading image: "<< tileset << "\n";
+        }
 
         // resize the vertex array to fit the level size
         m_vertices.setPrimitiveType(sf::Quads);

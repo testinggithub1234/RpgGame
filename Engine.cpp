@@ -12,7 +12,7 @@ bool Engine::Init() {
     level.LoadLevel("level");
     map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height);
 
-    player.Init(level.playerPos, sf::Vector2f(32, 32), "Resources/player.png");
+    player.Init(level.playerPos, sf::Vector2f(32, 32), "Resources/avatar.png");
     entities.Init();
 
     playerView.reset(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
