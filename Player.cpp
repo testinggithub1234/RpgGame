@@ -2,7 +2,6 @@
 #include "Collision.h"
 
 void Player::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
-    texture.loadFromFile(texLocation);
     sprite.setSize(size);
     sprite.setPosition(pos);
 

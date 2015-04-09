@@ -28,8 +28,6 @@ public:
 private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-    sf::Texture texture;
-
     sf::FloatRect boundingBox;
 
     sf::Clock clock;
