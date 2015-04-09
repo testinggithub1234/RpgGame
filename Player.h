@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Level.h"
+#include "MovementAnimation.h"
 
 class Player : public sf::Drawable {
 public:
@@ -13,6 +14,8 @@ public:
     void Execute(sf::Keyboard::Key key, Level level);
 
     void Update();
+
+    void Stop();
 
     sf::RectangleShape sprite;
 
@@ -30,6 +33,14 @@ private:
     sf::FloatRect boundingBox;
 
     sf::Clock clock;
+
+    enum Movement{up, down, right, left};
+    Movement movement;
+
+    MovementAnimation moveDown;
+    MovementAnimation moveUp;
+    MovementAnimation moveLeft;
+    MovementAnimation moveRight;
 };
 
 

@@ -37,3 +37,4 @@ void Level::LoadLevel(std::string lev) {
 
     solidObjectsList.clear();
 }
+

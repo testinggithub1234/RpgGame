@@ -42,6 +42,9 @@ void Engine::ProcessInput() {
             }
             player.Execute(event.key.code, level);
         }
+        if(event.type == sf::Event::KeyReleased){
+            player.Stop();
+        }
     }
 }
 
