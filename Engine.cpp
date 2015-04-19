@@ -6,7 +6,8 @@ Engine::Engine() {
 }
 
 bool Engine::Init() {
-    std::shared_ptr<sf::RenderWindow> initWindow(new sf::RenderWindow(sf::VideoMode(800, 600, 32), "RPG"));
+    sf::Vector2f windowsDimensions(800, 600);
+    std::shared_ptr<sf::RenderWindow> initWindow(new sf::RenderWindow(sf::VideoMode(windowsDimensions.x, windowsDimensions.y, 32), "RPG"));
 
     window = initWindow;
     window->setVerticalSyncEnabled(true);
@@ -16,7 +17,7 @@ bool Engine::Init() {
     if (!map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height))
         return false;
 
-    player.init(level.playerPos, sf::Vector2f(32, 32), "Resources/avatar.png");
+    player.init(level.playerPos, sf::Vector2f(32, 32), "Resources/player.png");
     entities.Init();
 
     entities.addNpc(sf::Vector2f(3, 0), sf::Vector2f(32,32), "Resources/policeNPC.png");
