@@ -6,8 +6,8 @@ Engine::Engine() {
 }
 
 bool Engine::Init() {
-    sf::Vector2f windowsDimensions(800, 600);
-    std::shared_ptr<sf::RenderWindow> initWindow(new sf::RenderWindow(sf::VideoMode(windowsDimensions.x, windowsDimensions.y, 32), "RPG"));
+    std::shared_ptr<sf::RenderWindow> initWindow(
+            new sf::RenderWindow(sf::VideoMode(800, 600, 32), "RPG"));
 
     window = initWindow;
     window->setVerticalSyncEnabled(true);
@@ -20,7 +20,7 @@ bool Engine::Init() {
     player.init(level.playerPos, sf::Vector2f(32, 32), "Resources/player.png");
     entities.Init();
 
-    entities.addNpc(sf::Vector2f(3, 0), sf::Vector2f(32,32), "Resources/policeNPC.png");
+    entities.addNpc(sf::Vector2f(3, 0), sf::Vector2f(32, 32), "Resources/policeNPC.png");
 
     playerView.reset(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
     playerView.setCenter(player.getPixelPosition());
@@ -50,19 +50,19 @@ void Engine::ProcessInput() {
             keyPressed = true;
         }
         if (event.type == sf::Event::KeyReleased) {
-           keyPressed = false;
+            keyPressed = false;
         }
     }
 
     frameTime = frameClock.restart();
 
-    if(keyPressed){
+    if (keyPressed) {
         player.execute();
-        if(collision.isPlayerColliding()){
+        if (collision.isPlayerColliding(player.getPosition(), sf::Vector2f(level.width, level.height), level.solidObjects)) {
             player.undoMovement();
         }
     }
-    else{
+    else {
         player.stop();
     }
 }
@@ -71,8 +71,8 @@ void Engine::Update() {
     player.update(frameTime);
     entities.Update();
 
-   // playerView.setCenter(player.getPixelPosition());
-   // window->setView(playerView);
+    playerView.setCenter(player.getPixelPosition());
+    window->setView(playerView);
 }
 
 void Engine::MainLoop() {
