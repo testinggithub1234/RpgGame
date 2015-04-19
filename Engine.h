@@ -7,6 +7,7 @@
 #include "Level.h"
 #include "Player.h"
 #include "EntityManager.h"
+#include "Collision.h"
 
 class Engine {
 public:
@@ -35,8 +36,15 @@ private:
 
     Level level;
 
+    Collision collision;
+
     sf::View playerView;
 
+    sf::Clock frameClock;
+
+    sf::Time frameTime;
+
+    bool keyPressed = false;
 };
 
 #endif //RPGGAME_ENGINE_H

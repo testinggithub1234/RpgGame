@@ -3,22 +3,22 @@
 
 #include <SFML/Graphics.hpp>
 #include "Level.h"
-#include "Animation.h"
 #include "Npc.h"
+#include "AnimatedSprite.h"
 
 class Player : public sf::Drawable {
 public:
     Player() { }
 
-    void Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation);
+    void init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation);
 
-    void Execute(sf::Keyboard::Key key, std::vector<bool> solidObjects, std::vector<Npc> npcList);
+    void execute();
 
-    void Update();
+    void undoMovement();
 
-    void Stop();
+    void update(sf::Time frameTime);
 
-    sf::RectangleShape sprite;
+    void stop();
 
     sf::Vector2f getPosition();
 
@@ -26,20 +26,29 @@ public:
 
     sf::Vector2f getSize();
 
-    sf::FloatRect boundingBox;
+    sf::FloatRect getGlobalBounds();
 
 private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-    enum Movement{up, down, right, left};
+    float speed = 80.f;
+
+    enum Movement {
+        up, down, right, left, null
+    };
     Movement move;
 
-    sf::Clock clock;
+    sf::Vector2f initPos;
 
-    Animation moveDown;
-    Animation moveUp;
-    Animation moveLeft;
-    Animation moveRight;
+    sf::Time frameTime;
+    sf::Texture texture;
+
+    Animation walkingAnimationDown;
+    Animation walkingAnimationUp;
+    Animation walkingAnimationLeft;
+    Animation walkingAnimationRight;
+    Animation *currentAnimation = &walkingAnimationDown;
+    AnimatedSprite animatedSprite;
 };
 
 

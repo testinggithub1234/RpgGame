@@ -1,105 +1,101 @@
 #include "Player.h"
-#include "Collision.h"
+#include <iostream>
 
-void Player::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
-    sprite.setSize(size);
-    sprite.setPosition(pos);
+using namespace std;
 
-    moveUp.Init(getPixelPosition(), getSize(), texLocation);
-    moveDown.Init(getPixelPosition(), getSize(), texLocation);
-    moveLeft.Init(getPixelPosition(), getSize(), texLocation);
-    moveRight.Init(getPixelPosition(), getSize(), texLocation);
-    moveUp.PushFrame(2, 0, 32, 38);
-    moveUp.PushFrame(8, 0, 32, 38);
-    moveUp.PushFrame(9, 0, 32, 38);
-    moveDown.PushFrame(0, 0, 32, 38);
-    moveDown.PushFrame(4, 0, 32, 38);
-    moveDown.PushFrame(5, 0, 32, 38);
-    moveLeft.PushFrame(1, 0, 32, 38);
-    moveLeft.PushFrame(6, 0, 32, 38);
-    moveLeft.PushFrame(7, 0, 32, 38);
-    moveRight.PushFrame(3, 0, 32, 38);
-    moveRight.PushFrame(10, 0, 32, 38);
-    moveRight.PushFrame(11, 0, 32, 38);
-
-    move = down;
-}
-
-void Player::Update() {
-    boundingBox = sprite.getGlobalBounds();
-    moveUp.Update(getPixelPosition());
-    moveDown.Update(getPixelPosition());
-    moveLeft.Update(getPixelPosition());
-    moveRight.Update(getPixelPosition());
-}
-
-void Player::Execute(sf::Keyboard::Key key, std::vector<bool> solidObjects, std::vector<Npc> npcList) {
-    int x = 0, y = 0;
-
-    if (clock.getElapsedTime().asMilliseconds() >= 80) {
-        if (key == sf::Keyboard::Down) {
-            y = 32;
-            move = down;
-            moveDown.Start();
-        }
-        else if (key == sf::Keyboard::Up) {
-            y = -32;
-            move = up;
-            moveUp.Start();
-        }
-        else if (key == sf::Keyboard::Left) {
-            x = -32;
-            move = left;
-            moveLeft.Start();
-        }
-        else if (key == sf::Keyboard::Right) {
-            x = 32;
-            move = right;
-            moveRight.Start();
-        }
-        sprite.move(x, y);
-
-        if (isPlayerCollidingWithObjects(getPosition(), solidObjects, npcList, boundingBox)) {
-            sprite.move(-x, -y);
-        }
-
-        clock.restart();
+void Player::init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
+    if (!texture.loadFromFile("Resources/player.png")) {
+        std::cout << "Failed to load player spritesheet!" << std::endl;
     }
+
+    walkingAnimationDown.setSpriteSheet(texture);
+    walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
+    walkingAnimationDown.addFrame(sf::IntRect(64, 0, 32, 32));
+    walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
+    walkingAnimationDown.addFrame(sf::IntRect(0, 0, 32, 32));
+    walkingAnimationLeft.setSpriteSheet(texture);
+    walkingAnimationLeft.addFrame(sf::IntRect(32, 32, 32, 32));
+    walkingAnimationLeft.addFrame(sf::IntRect(64, 32, 32, 32));
+    walkingAnimationLeft.addFrame(sf::IntRect(32, 32, 32, 32));
+    walkingAnimationLeft.addFrame(sf::IntRect(0, 32, 32, 32));
+    walkingAnimationRight.setSpriteSheet(texture);
+    walkingAnimationRight.addFrame(sf::IntRect(32, 64, 32, 32));
+    walkingAnimationRight.addFrame(sf::IntRect(64, 64, 32, 32));
+    walkingAnimationRight.addFrame(sf::IntRect(32, 64, 32, 32));
+    walkingAnimationRight.addFrame(sf::IntRect(0, 64, 32, 32));
+    walkingAnimationUp.setSpriteSheet(texture);
+    walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
+    walkingAnimationUp.addFrame(sf::IntRect(64, 96, 32, 32));
+    walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
+    walkingAnimationUp.addFrame(sf::IntRect(0, 96, 32, 32));
+
+    AnimatedSprite initAnimatedSprite(sf::seconds(0.2), true, false);
+    animatedSprite = initAnimatedSprite;
+    animatedSprite.setPosition(sf::Vector2f(sf::Vector2f(0, 0)));
+    animatedSprite.setAnimation(*currentAnimation);
+
+    move = null;
+}
+
+void Player::update(sf::Time frameTime) {
+    this->frameTime = frameTime;
+    animatedSprite.update(this->frameTime);
+}
+
+void Player::execute() {
+    sf::Vector2f movement(0.f, 0.f);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        movement.y += speed;
+        move = down;
+        currentAnimation = &walkingAnimationDown;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        movement.y -= speed;
+        move = up;
+        currentAnimation = &walkingAnimationUp;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        movement.x -= speed;
+        move = left;
+        currentAnimation = &walkingAnimationLeft;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        movement.x += speed;
+        move = right;
+        currentAnimation = &walkingAnimationRight;
+    }
+
+    initPos = getPixelPosition();
+
+    animatedSprite.play(*currentAnimation);
+    animatedSprite.move(movement * frameTime.asSeconds());
+}
+
+void Player::stop() {
+    animatedSprite.stop();
 }
 
 sf::Vector2f Player::getPosition() {
-    return sf::Vector2f(sprite.getPosition().x / sprite.getSize().x, sprite.getPosition().y / sprite.getSize().y);
+    return sf::Vector2f(animatedSprite.getPosition().x / getSize().x, animatedSprite.getPosition().y / getSize().y);
 }
 
 sf::Vector2f Player::getPixelPosition() {
-    return sprite.getPosition();
+    return animatedSprite.getPosition();
 }
 
 sf::Vector2f Player::getSize() {
-    return sprite.getSize();
+    return sf::Vector2f(animatedSprite.getGlobalBounds().height, animatedSprite.getGlobalBounds().width);
 }
 
-void Player::Stop() {
-    moveDown.Stop();
-    moveUp.Stop();
-    moveLeft.Stop();
-    moveRight.Stop();
+sf::FloatRect Player::getGlobalBounds() {
+    return animatedSprite.getGlobalBounds();
 }
 
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    switch (move) {
-        case up :
-            target.draw(moveUp, states);
-            break;
-        case down :
-            target.draw(moveDown, states);
-            break;
-        case left :
-            target.draw(moveLeft, states);
-            break;
-        case right :
-            target.draw(moveRight, states);
-            break;
-    }
+    target.draw(animatedSprite);
 }
 
+
+void Player::undoMovement() {
+    animatedSprite.setPosition(initPos);
+}

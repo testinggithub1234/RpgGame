@@ -1,68 +1,31 @@
-#include <iostream>
 #include "Animation.h"
 
-Animation::Animation() {
+Animation::Animation() : m_texture(NULL)
+{
 
 }
 
-void Animation::Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
-    stopped = true;
-
-    position = pos;
-    this->size = size;
-    textureLocation = texLocation;
-
-    Update(pos);
-    frame = 0;
+void Animation::addFrame(sf::IntRect rect)
+{
+    m_frames.push_back(rect);
 }
 
-void Animation::PushFrame(int left, int top, int width, int height) {
-    sf::IntRect subRect;
-    subRect.left = left * width;
-    subRect.top = top * height;
-    subRect.width = width;
-    subRect.height = height;
-
-    sf::RectangleShape sprite;
-    sprite.setTexture(&texture.getTexture(textureLocation));
-    sprite.setTextureRect(subRect);
-    sprite.setPosition(position);
-    sprite.setSize(size);
-
-    sprites.push_back(sprite);
+void Animation::setSpriteSheet(const sf::Texture& texture)
+{
+    m_texture = &texture;
 }
 
-void Animation::Update(sf::Vector2f pos) {
-    for(int i = 0; i < sprites.size();i++)
-        sprites[i].setPosition(pos);
-
-    if (clock.getElapsedTime().asMilliseconds() > 200) {
-        if (frame < sprites.size() - 1)
-            frame++;
-        else
-            frame = 1;
-
-        if(stopped){
-            frame = 0;
-        }
-
-        clock.restart();
-    }
+const sf::Texture* Animation::getSpriteSheet() const
+{
+    return m_texture;
 }
 
-void Animation::Start() {
-    if(stopped){
-        frame = 1;
-        stopped = false;
-    }
+std::size_t Animation::getSize() const
+{
+    return m_frames.size();
 }
 
-void Animation::Stop() {
-    stopped = true;
-    clock.restart();
+const sf::IntRect& Animation::getFrame(std::size_t n) const
+{
+    return m_frames[n];
 }
-
-void Animation::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    target.draw(sprites[frame], states);
-}
-

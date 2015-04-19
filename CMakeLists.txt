@@ -4,7 +4,7 @@ project(RpgGame)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "/home/andrei/ClionProjects/RpgGame/Binaries")
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES Main.cpp)
 
 if(CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE Debug)
@@ -19,7 +19,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 
 # Define sources and executable
 set(EXECUTABLE_NAME "RpgGame")
-add_executable(RpgGame ${SOURCE_FILES} TileMap.h Engine.cpp Engine.h Level.cpp Level.h Player.cpp Player.h Fps.h Collision.h Npc.cpp Npc.h EntityManager.cpp EntityManager.h TextureManager.cpp TextureManager.h Animation.cpp Animation.h)
+add_executable(RpgGame ${SOURCE_FILES} TileMap.h Engine.cpp Engine.h Level.cpp Level.h Player.cpp Player.h Fps.h Collision.h Npc.cpp Npc.h EntityManager.cpp EntityManager.h TextureManager.cpp TextureManager.h Animation.cpp Animation.h AnimatedSprite.cpp AnimatedSprite.h Collision.cpp Collision.h)
 
 
 # Detect and add SFML

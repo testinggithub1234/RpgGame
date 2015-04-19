@@ -16,7 +16,7 @@ bool Engine::Init() {
     if (!map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height))
         return false;
 
-    player.Init(level.playerPos, sf::Vector2f(32, 32), "Resources/avatar.png");
+    player.init(level.playerPos, sf::Vector2f(32, 32), "Resources/avatar.png");
     entities.Init();
 
     entities.addNpc(sf::Vector2f(3, 0), sf::Vector2f(32,32), "Resources/policeNPC.png");
@@ -46,20 +46,32 @@ void Engine::ProcessInput() {
             if (event.key.code == sf::Keyboard::Escape) {
                 window->close();
             }
-            player.Execute(event.key.code, level.solidObjects, entities.npcList);
+            keyPressed = true;
         }
         if (event.type == sf::Event::KeyReleased) {
-            player.Stop();
+           keyPressed = false;
         }
+    }
+
+    frameTime = frameClock.restart();
+
+    if(keyPressed){
+        player.execute();
+        if(collision.isPlayerColliding()){
+            player.undoMovement();
+        }
+    }
+    else{
+        player.stop();
     }
 }
 
 void Engine::Update() {
-    player.Update();
+    player.update(frameTime);
     entities.Update();
 
-    playerView.setCenter(player.getPixelPosition());
-    window->setView(playerView);
+   // playerView.setCenter(player.getPixelPosition());
+   // window->setView(playerView);
 }
 
 void Engine::MainLoop() {

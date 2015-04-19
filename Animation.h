@@ -1,40 +1,24 @@
-#ifndef RPGGAME_ANIMATION_H
-#define RPGGAME_ANIMATION_H
+#ifndef ANIMATION_INCLUDE
+#define ANIMATION_INCLUDE
 
+#include <vector>
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
-#include <SFML/Graphics.hpp>
-#include "TextureManager.h"
-
-class Animation : public sf::Drawable {
+class Animation
+{
 public:
     Animation();
 
-    bool stopped;
-
-    void Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation);
-
-    void PushFrame(int left, int top, int width, int height);
-
-    void Start();
-
-    void Stop();
-
-    void Update(sf::Vector2f pos);
+    void addFrame(sf::IntRect rect);
+    void setSpriteSheet(const sf::Texture& texture);
+    const sf::Texture* getSpriteSheet() const;
+    std::size_t getSize() const;
+    const sf::IntRect& getFrame(std::size_t n) const;
 
 private:
-    std::string textureLocation;
-
-    std::vector<sf::RectangleShape> sprites;
-
-    sf::Vector2f position, size;
-
-    sf::Clock clock;
-    int frame;
-
-    TextureManager texture;
-
-    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+    std::vector<sf::IntRect> m_frames;
+    const sf::Texture* m_texture;
 };
 
-
-#endif //RPGGAME_MOVEMENTANIMATION_H
+#endif // ANIMATION_INCLUDE
