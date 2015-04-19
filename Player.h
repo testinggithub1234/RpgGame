@@ -15,11 +15,15 @@ public:
 
     void execute();
 
+    void movement();
+
     void undoMovement();
 
     void update(sf::Time frameTime);
 
     void stop();
+
+    sf::Vector2f destination;
 
     sf::Vector2f getPosition();
 
@@ -34,7 +38,7 @@ private:
 
     TextureManager texture;
 
-    float speed = 80.f;
+    float speed = 100.f;
 
     enum Movement {
         up, down, right, left, null
