@@ -3,11 +3,12 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "TileMap.h"
+#include "TileMap2.h"
 #include "Level.h"
 #include "Player.h"
 #include "EntityManager.h"
 #include "Collision.h"
+#include "TileMap.h"
 
 class Engine {
 public:

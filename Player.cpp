@@ -43,7 +43,7 @@ void Player::update(sf::Time frameTime) {
 
 void Player::execute() {
     sf::Vector2f movement(0.f, 0.f);
-    if (move == null) {
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
             movement.y += speed;
             move = down;
@@ -65,11 +65,11 @@ void Player::execute() {
             currentAnimation = &walkingAnimationRight;
         }
         animatedSprite.play(*currentAnimation);
-    }
+
     initPos = getPixelPosition();
 
 
-  //  animatedSprite.move(movement * frameTime.asSeconds());
+    animatedSprite.move(movement * frameTime.asSeconds());
 }
 
 void Player::movement() {
