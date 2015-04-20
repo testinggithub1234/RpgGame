@@ -22,7 +22,7 @@ void Level::LoadLevel(std::string lev) {
         readLevel >> var;
         solidObjectsList.push_back(var);
     }
-
+/*
     solidObjects.resize(width * height);
 
     for (int i = 0; i < width * height; i++) {
@@ -35,6 +35,6 @@ void Level::LoadLevel(std::string lev) {
         }
     }
 
-    solidObjectsList.clear();
+    solidObjectsList.clear();*/
 }
 

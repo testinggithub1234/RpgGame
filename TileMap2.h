@@ -20,7 +20,6 @@ public:
         }
 
         // resize the vertex array to fit the level size
-        m_vertices.setPrimitiveType(sf::Quads);
         m_vertices.resize(width * height * 4);
 
         // populate the vertex array, with one quad per tile
@@ -65,22 +64,26 @@ private:
         states.transform *= getTransform();
 
         states.texture = &m_tileset;
+        sf::FloatRect rect;
 
-        // target.draw(m_vertices, states);
-        for (int i = 0; i < m_vertices.getVertexCount(); i += 4) {
-            sf::FloatRect rect;
+        target.draw(&m_vertices[0], m_vertices.size(), sf::PrimitiveType::Quads, states);
+
+        /*
+        for (int i = 0; i < m_vertices.size(); i += 4) {
+
             rect.width = 32;
             rect.height = 32;
-            rect.top = m_vertices.operator[](i).position.y;
-            rect.left = m_vertices.operator[](i).position.x;
+            rect.top = m_vertices[i].position.y;
+            rect.left = m_vertices[i].position.x;
             if (rect.intersects(screenRect)) {
-                target.draw(&m_vertices.operator[](i), 4, sf::PrimitiveType::Quads, states);
+                target.draw(&m_vertices[i], 4, sf::PrimitiveType::Quads, states);
             }
-        }
+        }*/
     }
 
     sf::FloatRect screenRect;
-    sf::VertexArray m_vertices;
+    // sf::VertexArray m_vertices;
+    std::vector<sf::Vertex> m_vertices;
     sf::Texture m_tileset;
 };
 

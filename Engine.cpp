@@ -46,24 +46,22 @@ void Engine::ProcessInput() {
             if (event.key.code == sf::Keyboard::Escape) {
                 window->close();
             }
-            keyPressed = true;
-        }
-        if (event.type == sf::Event::KeyReleased) {
-            keyPressed = false;
         }
     }
-
     frameTime = frameClock.restart();
 
-    if (keyPressed) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) or sf::Keyboard::isKeyPressed(sf::Keyboard::Down) or
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Left) or sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         player.execute();
-        if (collision.isPlayerColliding(player.getPosition(), sf::Vector2f(level.width, level.height), level.solidObjects)) {
+        if (collision.isPlayerColliding(player.getPosition(), sf::Vector2f(level.width, level.height),
+                                        level.solidObjects)) {
             player.undoMovement();
         }
     }
     else {
         player.stop();
     }
+
     showFps();
 }
 
