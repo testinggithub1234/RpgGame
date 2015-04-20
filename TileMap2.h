@@ -82,7 +82,6 @@ private:
     }
 
     sf::FloatRect screenRect;
-    // sf::VertexArray m_vertices;
     std::vector<sf::Vertex> m_vertices;
     sf::Texture m_tileset;
 };

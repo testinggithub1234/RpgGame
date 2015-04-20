@@ -30,7 +30,7 @@ void Player::init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) 
     animatedSprite = initAnimatedSprite;
     animatedSprite.setPosition(pos);
     animatedSprite.setAnimation(*currentAnimation);
-
+    animatedSprite.setLooped(true);
     move = null;
     direction.x = 0;
     direction.y = 0;
@@ -86,16 +86,18 @@ void Player::movement() {
             destination = getPosition() + direction;
             move = isMoving;
             break;
-        case null:
-            stop();
-            break;
         case isMoving:
             animatedSprite.move(direction * speed * frameTime.asSeconds());
-            if (getPixelPosition().x > destination.x * 32 or getPixelPosition().y > destination.y * 32) {
+            if (direction.x == -1 or direction.y == -1) {
+                if (getPixelPosition().x < destination.x * 32 or getPixelPosition().y < destination.y * 32) {
+                    animatedSprite.setPosition(destination.x * 32, destination.y * 32);
+                    move = null;
+                }
+            }
+            else if (getPixelPosition().x > destination.x * 32 or getPixelPosition().y > destination.y * 32) {
                 animatedSprite.setPosition(destination.x * 32, destination.y * 32);
                 move = null;
             }
-
             break;
     }
 }
@@ -103,11 +105,15 @@ void Player::movement() {
 
 void Player::undoMovement() {
     animatedSprite.setPosition(initPos);
+    destination = getPosition();
+    direction = sf::Vector2f(0, 0);
     move = null;
 }
 
 void Player::stop() {
-    animatedSprite.stop();
+    if (move == null) {
+        animatedSprite.stop();
+    }
 }
 
 sf::Vector2f Player::getPosition() {
@@ -126,9 +132,11 @@ sf::FloatRect Player::getGlobalBounds() {
     return animatedSprite.getGlobalBounds();
 }
 
+sf::Vector2f Player::getDestination() {
+    return destination;
+}
+
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(animatedSprite);
 }
-
-
 

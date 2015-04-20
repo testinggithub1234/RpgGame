@@ -23,33 +23,35 @@ public:
 
     void stop();
 
-    sf::Vector2f direction;
-
-    sf::Vector2f destination;
-
     sf::Vector2f getPosition();
 
     sf::Vector2f getPixelPosition();
 
     sf::Vector2f getSize();
 
+    sf::Vector2f getDestination();
+
     sf::FloatRect getGlobalBounds();
 
 private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-    TextureManager texture;
-
-    float speed = 100.f;
+    float speed = 70.f;
 
     enum Movement {
         up, down, right, left, null, isMoving
     };
     Movement move;
 
+    sf::Vector2f destination;
+
+    sf::Vector2f direction;
+
     sf::Vector2f initPos;
 
     sf::Time frameTime;
+
+    TextureManager texture;
 
     Animation walkingAnimationDown;
     Animation walkingAnimationUp;

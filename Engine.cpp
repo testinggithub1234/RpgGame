@@ -19,7 +19,7 @@ bool Engine::Init() {
     player.init(level.playerPos, sf::Vector2f(32, 32), "Resources/player.png");
     entities.Init();
 
-    entities.addNpc(sf::Vector2f(3, 0), sf::Vector2f(32, 32), "Resources/policeNPC.png");
+    // entities.addNpc(sf::Vector2f(3, 0), sf::Vector2f(32, 32), "Resources/policeNPC.png");
 
     playerView.reset(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
     playerView.setCenter(player.getPixelPosition());
@@ -53,13 +53,14 @@ void Engine::ProcessInput() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) or sf::Keyboard::isKeyPressed(sf::Keyboard::Down) or
         sf::Keyboard::isKeyPressed(sf::Keyboard::Left) or sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         player.execute();
-        if (collision.isPlayerColliding(player.getPosition(), sf::Vector2f(level.width, level.height),
-                                        level.solidObjects, player.destination)) {
-            player.undoMovement();
-        }
     }
     else {
         player.stop();
+    }
+    if (collision.isPlayerColliding(player.getPosition(), player.getDestination(),
+                                    sf::Vector2f(level.width, level.height),
+                                    level.solidObjects)) {
+        player.undoMovement();
     }
     player.movement();
     showFps();
