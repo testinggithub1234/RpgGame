@@ -14,7 +14,7 @@ bool Engine::Init() {
     window->setFramerateLimit(60);
 
     level.LoadLevel("level");
-    map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height, window->getDefaultView());
+    map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height);
 
     player.init(level.playerPos, sf::Vector2f(32, 32), "Resources/player.png");
     entities.Init();
@@ -74,7 +74,7 @@ void Engine::Update() {
     playerView.setCenter(player.getPixelPosition());
     window->setView(playerView);
 
-    map.setView(playerView);
+    //map.setView(playerView);
 }
 
 void Engine::MainLoop() {
