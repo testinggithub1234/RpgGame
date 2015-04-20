@@ -33,7 +33,7 @@ private:
 
     EntityManager entities;
 
-    TileMap2 map;
+    TileMap map;
 
     Level level;
 

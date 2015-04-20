@@ -10,11 +10,11 @@ bool Engine::Init() {
             new sf::RenderWindow(sf::VideoMode(800, 600, 32), "RPG"));
 
     window = initWindow;
-    window->setVerticalSyncEnabled(true);
-    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(false);
+    window->setFramerateLimit(0);
 
     level.LoadLevel("level");
-    map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height);
+    map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height, window->getView());
 
     player.init(level.playerPos, sf::Vector2f(32, 32), "Resources/player.png");
     entities.Init();
@@ -73,8 +73,7 @@ void Engine::Update() {
 
     playerView.setCenter(player.getPixelPosition());
     window->setView(playerView);
-
-    //map.setView(playerView);
+    map.setView(window->getView());
 }
 
 void Engine::MainLoop() {

@@ -9,14 +9,14 @@ class TileMap2 : public sf::Drawable, public sf::Transformable {
 public:
 
     bool Load(const std::string &tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width,
-              unsigned int height) {
+              unsigned int height, sf::View view) {
         // load the tileset texture
         if (!m_tileset.loadFromFile(tileset)) {
-            std::cout << "GAME_ERROR: Image: "<< tileset << " was not found. It is filled with an empty image.\n";
+            std::cout << "GAME_ERROR: Image: " << tileset << " was not found. It is filled with an empty image.\n";
             return false;
         }
-        else{
-            std::cout << "DEBUG_MESSAGE: loading image: "<< tileset << "\n";
+        else {
+            std::cout << "DEBUG_MESSAGE: loading image: " << tileset << "\n";
         }
 
         // resize the vertex array to fit the level size
@@ -28,6 +28,7 @@ public:
             for (unsigned int j = 0; j < height; ++j) {
                 // get the current tile number
                 int tileNumber = tiles[i + j * width];
+
                 // find its position in the tileset texture
                 int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
                 int tv = tileNumber / (m_tileset.getSize().x / tileSize.x);
@@ -51,22 +52,36 @@ public:
         return true;
     }
 
+    void setView(sf::View view) {
+        sf::FloatRect initRect(sf::Vector2f(view.getCenter().x - (view.getSize().x) / 2,
+                                            view.getCenter().y - (view.getSize().y) / 2),
+                               view.getSize());
+        screenRect = initRect;
+    }
+
 private:
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {
-        // apply the transform
         states.transform *= getTransform();
 
-        // apply the tileset texture
         states.texture = &m_tileset;
 
-        // draw the vertex array
-        target.draw(m_vertices, states);
+        // target.draw(m_vertices, states);
+        for (int i = 0; i < m_vertices.getVertexCount(); i += 4) {
+            sf::FloatRect rect;
+            rect.width = 32;
+            rect.height = 32;
+            rect.top = m_vertices.operator[](i).position.y;
+            rect.left = m_vertices.operator[](i).position.x;
+            if (rect.intersects(screenRect)) {
+                target.draw(&m_vertices.operator[](i), 4, sf::PrimitiveType::Quads, states);
+            }
+        }
     }
 
+    sf::FloatRect screenRect;
     sf::VertexArray m_vertices;
     sf::Texture m_tileset;
 };
-
 
 #endif //RPGGAME_TILEMAP_H
