@@ -32,8 +32,8 @@ void Player::init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) 
     animatedSprite.setAnimation(*currentAnimation);
 
     move = null;
-    destination.x = 0;
-    destination.y = 0;
+    direction.x = 0;
+    direction.y = 0;
 }
 
 void Player::update(sf::Time frameTime) {
@@ -42,40 +42,68 @@ void Player::update(sf::Time frameTime) {
 }
 
 void Player::execute() {
-    sf::Vector2f movement(0.f, 0.f);
-
+    if (move == null) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            movement.y += speed;
             move = down;
             currentAnimation = &walkingAnimationDown;
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            movement.y -= speed;
             move = up;
             currentAnimation = &walkingAnimationUp;
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            movement.x -= speed;
             move = left;
             currentAnimation = &walkingAnimationLeft;
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            movement.x += speed;
             move = right;
             currentAnimation = &walkingAnimationRight;
         }
-        animatedSprite.play(*currentAnimation);
-
-    initPos = getPixelPosition();
-
-
-    animatedSprite.move(movement * frameTime.asSeconds());
+        initPos = getPixelPosition();
+    }
+    animatedSprite.play(*currentAnimation);
 }
 
 void Player::movement() {
-    if(move != null){
+    switch (move) {
+        case up:
+            direction = sf::Vector2f(0, -1);
+            destination = getPosition() + direction;
+            move = isMoving;
+            break;
+        case down:
+            direction = sf::Vector2f(0, 1);
+            destination = getPosition() + direction;
+            move = isMoving;
+            break;
+        case left:
+            direction = sf::Vector2f(-1, 0);
+            destination = getPosition() + direction;
+            move = isMoving;
+            break;
+        case right:
+            direction = sf::Vector2f(1, 0);
+            destination = getPosition() + direction;
+            move = isMoving;
+            break;
+        case null:
+            stop();
+            break;
+        case isMoving:
+            animatedSprite.move(direction * speed * frameTime.asSeconds());
+            if (getPixelPosition().x > destination.x * 32 or getPixelPosition().y > destination.y * 32) {
+                animatedSprite.setPosition(destination.x * 32, destination.y * 32);
+                move = null;
+            }
 
+            break;
     }
+}
+
+
+void Player::undoMovement() {
+    animatedSprite.setPosition(initPos);
+    move = null;
 }
 
 void Player::stop() {
@@ -102,9 +130,5 @@ void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(animatedSprite);
 }
 
-
-void Player::undoMovement() {
-    animatedSprite.setPosition(initPos);
-}
 
 

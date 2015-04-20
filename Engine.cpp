@@ -54,14 +54,14 @@ void Engine::ProcessInput() {
         sf::Keyboard::isKeyPressed(sf::Keyboard::Left) or sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         player.execute();
         if (collision.isPlayerColliding(player.getPosition(), sf::Vector2f(level.width, level.height),
-                                        level.solidObjects)) {
+                                        level.solidObjects, player.destination)) {
             player.undoMovement();
         }
     }
     else {
         player.stop();
     }
-
+    player.movement();
     showFps();
 }
 

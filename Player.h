@@ -23,6 +23,8 @@ public:
 
     void stop();
 
+    sf::Vector2f direction;
+
     sf::Vector2f destination;
 
     sf::Vector2f getPosition();
@@ -41,7 +43,7 @@ private:
     float speed = 100.f;
 
     enum Movement {
-        up, down, right, left, null
+        up, down, right, left, null, isMoving
     };
     Movement move;
 
