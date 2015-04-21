@@ -7,15 +7,26 @@
 
 class Level {
 public:
+    Level();
+
+    void LoadLevel(std::string lev);
+
+    std::vector<int> getTerrain();
+
+    std::vector<bool> getSolidObjectsList();
+
+    std::vector<int> getSecondLayer();
+
+    sf::Vector2f getPlayerPosition();
+
+    sf::Vector2f getSize();
+
+private:
     std::vector<int> terrain;
     std::vector<int> secondLayer;
     std::vector<bool> solidObjects;
-
     sf::Vector2f playerPos;///Players starting position
-    unsigned int width, height;
-
-    void LoadLevel(std::string lev);
+    float width, height;
 };
-
 
 #endif //RPGGAME_LEVEL_H

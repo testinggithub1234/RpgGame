@@ -14,10 +14,11 @@ bool Engine::Init() {
     window->setFramerateLimit(0);
 
     level.LoadLevel("level");
-    terrain.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.terrain, level.width, level.height,
+    terrain.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.getTerrain(), level.getSize().x,
+                 level.getSize().y,
                  window->getView());
 
-    player.init(level.playerPos, sf::Vector2f(32, 32), "Resources/player.png");
+    player.init(level.getPlayerPosition(), sf::Vector2f(32, 32), "Resources/player.png");
     entities.Init();
 
     // entities.addNpc(sf::Vector2f(3, 0), sf::Vector2f(32, 32), "Resources/policeNPC.png");
@@ -51,8 +52,8 @@ void Engine::ProcessInput() {
         player.stop();
     }
     if (collision.isPlayerColliding(player.getPosition(), player.getDestination(),
-                                    sf::Vector2f(level.width, level.height),
-                                    level.solidObjects)) {
+                                    sf::Vector2f(level.getSize().x, level.getSize().y),
+                                    level.getSolidObjectsList())) {
         player.undoMovement();
     }
     player.movement();

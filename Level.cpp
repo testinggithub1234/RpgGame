@@ -3,6 +3,11 @@
 #include <iostream>
 #include "Parser.h"
 
+Level::Level() {
+
+}
+
+
 void Level::LoadLevel(std::string lev) {
     txml::XMLDocument doc;
     doc.LoadFile("untitled.tmx");
@@ -14,7 +19,7 @@ void Level::LoadLevel(std::string lev) {
     playerPos.x = 0;// Pixels
     playerPos.y = 0;
 
-//Terrain
+    //Terrain
     txml::XMLElement *data = root->FirstChildElement("layer")->FirstChildElement("data");
     const char *a = data->GetText();
     char *str = (char *) a;
@@ -27,6 +32,7 @@ void Level::LoadLevel(std::string lev) {
         pch = strtok(NULL, " ,");
     }
 
+    //Second Layer
     data = root->FirstChildElement("layer")->NextSiblingElement("layer");
     std::string check = data->Attribute("name");
     if (check == "SecondLayer") {
@@ -43,6 +49,7 @@ void Level::LoadLevel(std::string lev) {
         }
     }
 
+    //Solid objects list
     std::vector<int> solidObjectsList;
 
     txml::XMLElement *solidObj = root->FirstChildElement("tileset")->FirstChildElement("tile");
@@ -58,7 +65,7 @@ void Level::LoadLevel(std::string lev) {
         solidObj = solidObj->NextSiblingElement("tile");
     }
 
-    solidObjects.resize(width * height);
+    solidObjects.resize((unsigned long) (width * height));
 
     for (int i = 0; i < terrain.size(); i++) {
         solidObjects[i] = false;
@@ -71,7 +78,6 @@ void Level::LoadLevel(std::string lev) {
     }
 
     for (int i = 0; i < secondLayer.size(); i++) {
-        solidObjects[i] = false;
         for (int j = 0; j < solidObjectsList.size(); j++) {
             if (secondLayer[i] == solidObjectsList[j]) {
                 solidObjects[i] = true;
@@ -81,5 +87,25 @@ void Level::LoadLevel(std::string lev) {
     }
 
     solidObjectsList.clear();
+}
+
+std::vector<int> Level::getTerrain() {
+    return terrain;
+}
+
+std::vector<int> Level::getSecondLayer() {
+    return secondLayer;
+}
+
+sf::Vector2f Level::getPlayerPosition() {
+    return playerPos;
+}
+
+std::vector<bool> Level::getSolidObjectsList() {
+    return solidObjects;
+}
+
+sf::Vector2f Level::getSize() {
+    return sf::Vector2f(width, height);
 }
 

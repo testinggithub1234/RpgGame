@@ -9,14 +9,12 @@
 #   include <string.h>
 #   include <stdarg.h>
 #else
-
 #   include <cctype>
 #   include <climits>
 #   include <cstdio>
 #   include <cstdlib>
 #   include <cstring>
 #   include <cstdarg>
-
 #endif
 
 /*
@@ -106,19 +104,12 @@ static const int TIXML2_PATCH_VERSION = 0;
 
 namespace txml {
     class XMLDocument;
-
     class XMLElement;
-
     class XMLAttribute;
-
     class XMLComment;
-
     class XMLText;
-
     class XMLDeclaration;
-
     class XMLUnknown;
-
     class XMLPrinter;
 
 /*
@@ -143,7 +134,6 @@ namespace txml {
         };
 
         StrPair() : _flags(0), _start(0), _end(0) { }
-
         ~StrPair();
 
         void Set(char *start, char *end, int flags) {
@@ -174,7 +164,6 @@ namespace txml {
 
     private:
         void Reset();
-
         void CollapseWhitespace();
 
         enum {
@@ -318,9 +307,7 @@ namespace txml {
         virtual void *Alloc() = 0;
 
         virtual void Free(void *) = 0;
-
         virtual void SetTracked() = 0;
-
         virtual void Clear() = 0;
     };
 
@@ -332,7 +319,6 @@ namespace txml {
     class MemPoolT : public MemPool {
     public:
         MemPoolT() : _root(0), _currentAllocs(0), _nAllocs(0), _maxAllocs(0), _nUntracked(0) { }
-
         ~MemPoolT() {
             Clear();
         }
@@ -442,6 +428,7 @@ namespace txml {
     };
 
 
+
 /**
 	Implements the interface to the "Visitor pattern" (see the Accept() method.)
 	If you call the Accept() method, it requires being passed a XMLVisitor
@@ -464,7 +451,6 @@ namespace txml {
         virtual bool VisitEnter(const XMLDocument & /*doc*/ ) {
             return true;
         }
-
         /// Visit a document.
         virtual bool VisitExit(const XMLDocument & /*doc*/ ) {
             return true;
@@ -474,7 +460,6 @@ namespace txml {
         virtual bool VisitEnter(const XMLElement & /*element*/, const XMLAttribute * /*firstAttribute*/ ) {
             return true;
         }
-
         /// Visit an element.
         virtual bool VisitExit(const XMLElement & /*element*/ ) {
             return true;
@@ -484,17 +469,14 @@ namespace txml {
         virtual bool Visit(const XMLDeclaration & /*declaration*/ ) {
             return true;
         }
-
         /// Visit a text node.
         virtual bool Visit(const XMLText & /*text*/ ) {
             return true;
         }
-
         /// Visit a comment node.
         virtual bool Visit(const XMLComment & /*comment*/ ) {
             return true;
         }
-
         /// Visit an unknown node.
         virtual bool Visit(const XMLUnknown & /*unknown*/ ) {
             return true;
@@ -592,7 +574,6 @@ namespace txml {
         }
 
         static const char *ReadBOM(const char *p, bool *hasBOM);
-
         // p is the starting location,
         // the UTF-8 value of the entity will be placed in value, and length filled in.
         static const char *GetCharacterRef(const char *p, char *value, int *length);
@@ -646,16 +627,13 @@ namespace txml {
 */
     class TINYXML2_LIB XMLNode {
         friend class XMLDocument;
-
         friend class XMLElement;
-
     public:
 
         /// Get the XMLDocument that owns this XMLNode.
         const XMLDocument *GetDocument() const {
             return _document;
         }
-
         /// Get the XMLDocument that owns this XMLNode.
         XMLDocument *GetDocument() {
             return _document;
@@ -665,27 +643,22 @@ namespace txml {
         virtual XMLElement *ToElement() {
             return 0;
         }
-
         /// Safely cast to Text, or null.
         virtual XMLText *ToText() {
             return 0;
         }
-
         /// Safely cast to a Comment, or null.
         virtual XMLComment *ToComment() {
             return 0;
         }
-
         /// Safely cast to a Document, or null.
         virtual XMLDocument *ToDocument() {
             return 0;
         }
-
         /// Safely cast to a Declaration, or null.
         virtual XMLDeclaration *ToDeclaration() {
             return 0;
         }
-
         /// Safely cast to an Unknown, or null.
         virtual XMLUnknown *ToUnknown() {
             return 0;
@@ -825,7 +798,6 @@ namespace txml {
         XMLNode *LinkEndChild(XMLNode *addThis) {
             return InsertEndChild(addThis);
         }
-
         /**
             Add a child node as the first (left) child.
             If the child node is already part of the document,
@@ -834,7 +806,6 @@ namespace txml {
             belong to the same document.
         */
         XMLNode *InsertFirstChild(XMLNode *addThis);
-
         /**
             Add a node after the specified child node.
             If the child node is already part of the document,
@@ -893,7 +864,6 @@ namespace txml {
 
     protected:
         XMLNode(XMLDocument *);
-
         virtual ~XMLNode();
 
         virtual char *ParseDeep(char *, StrPair *);
@@ -934,9 +904,7 @@ namespace txml {
 */
     class TINYXML2_LIB XMLText : public XMLNode {
         friend class XMLBase;
-
         friend class XMLDocument;
-
     public:
         virtual bool Accept(XMLVisitor *visitor) const;
 
@@ -952,7 +920,6 @@ namespace txml {
         void SetCData(bool isCData) {
             _isCData = isCData;
         }
-
         /// Returns true if this is a CDATA text element.
         bool CData() const {
             return _isCData;
@@ -980,7 +947,6 @@ namespace txml {
 /** An XML Comment. */
     class TINYXML2_LIB XMLComment : public XMLNode {
         friend class XMLDocument;
-
     public:
         virtual XMLComment *ToComment() {
             return this;
@@ -998,7 +964,6 @@ namespace txml {
 
     protected:
         XMLComment(XMLDocument *doc);
-
         virtual ~XMLComment();
 
         char *ParseDeep(char *, StrPair *endTag);
@@ -1020,7 +985,6 @@ namespace txml {
 */
     class TINYXML2_LIB XMLDeclaration : public XMLNode {
         friend class XMLDocument;
-
     public:
         virtual XMLDeclaration *ToDeclaration() {
             return this;
@@ -1038,7 +1002,6 @@ namespace txml {
 
     protected:
         XMLDeclaration(XMLDocument *doc);
-
         virtual ~XMLDeclaration();
 
         char *ParseDeep(char *, StrPair *endTag);
@@ -1057,7 +1020,6 @@ namespace txml {
 */
     class TINYXML2_LIB XMLUnknown : public XMLNode {
         friend class XMLDocument;
-
     public:
         virtual XMLUnknown *ToUnknown() {
             return this;
@@ -1075,7 +1037,6 @@ namespace txml {
 
     protected:
         XMLUnknown(XMLDocument *doc);
-
         virtual ~XMLUnknown();
 
         char *ParseDeep(char *, StrPair *endTag);
@@ -1086,6 +1047,7 @@ namespace txml {
     };
 
 
+
 /** An attribute is a name-value pair. Elements have an arbitrary
 	number of attributes, each with a unique name.
 	@note The attributes are not XMLNodes. You may only query the
@@ -1093,7 +1055,6 @@ namespace txml {
 */
     class TINYXML2_LIB XMLAttribute {
         friend class XMLElement;
-
     public:
         /// The name of the attribute.
         const char *Name() const;
@@ -1115,28 +1076,24 @@ namespace txml {
             QueryIntValue(&i);
             return i;
         }
-
         /// Query as an unsigned integer. See IntValue()
         unsigned UnsignedValue() const {
             unsigned i = 0;
             QueryUnsignedValue(&i);
             return i;
         }
-
         /// Query as a boolean. See IntValue()
         bool BoolValue() const {
             bool b = false;
             QueryBoolValue(&b);
             return b;
         }
-
         /// Query as a double. See IntValue()
         double DoubleValue() const {
             double d = 0;
             QueryDoubleValue(&d);
             return d;
         }
-
         /// Query as a float. See IntValue()
         float FloatValue() const {
             float f = 0;
@@ -1149,34 +1106,25 @@ namespace txml {
             and XML_WRONG_ATTRIBUTE_TYPE if the conversion is not successful.
         */
         XMLError QueryIntValue(int *value) const;
-
         /// See QueryIntValue
         XMLError QueryUnsignedValue(unsigned int *value) const;
-
         /// See QueryIntValue
         XMLError QueryBoolValue(bool *value) const;
-
         /// See QueryIntValue
         XMLError QueryDoubleValue(double *value) const;
-
         /// See QueryIntValue
         XMLError QueryFloatValue(float *value) const;
 
         /// Set the attribute to a string value.
         void SetAttribute(const char *value);
-
         /// Set the attribute to value.
         void SetAttribute(int value);
-
         /// Set the attribute to value.
         void SetAttribute(unsigned value);
-
         /// Set the attribute to value.
         void SetAttribute(bool value);
-
         /// Set the attribute to value.
         void SetAttribute(double value);
-
         /// Set the attribute to value.
         void SetAttribute(float value);
 
@@ -1208,15 +1156,12 @@ namespace txml {
 */
     class TINYXML2_LIB XMLElement : public XMLNode {
         friend class XMLBase;
-
         friend class XMLDocument;
-
     public:
         /// Get the name of an element (which is the Value() of the node.)
         const char *Name() const {
             return Value();
         }
-
         /// Set the name of the element.
         void SetName(const char *str, bool staticMem = false) {
             SetValue(str, staticMem);
@@ -1263,28 +1208,24 @@ namespace txml {
             QueryIntAttribute(name, &i);
             return i;
         }
-
         /// See IntAttribute()
         unsigned UnsignedAttribute(const char *name) const {
             unsigned i = 0;
             QueryUnsignedAttribute(name, &i);
             return i;
         }
-
         /// See IntAttribute()
         bool BoolAttribute(const char *name) const {
             bool b = false;
             QueryBoolAttribute(name, &b);
             return b;
         }
-
         /// See IntAttribute()
         double DoubleAttribute(const char *name) const {
             double d = 0;
             QueryDoubleAttribute(name, &d);
             return d;
         }
-
         /// See IntAttribute()
         float FloatAttribute(const char *name) const {
             float f = 0;
@@ -1311,7 +1252,6 @@ namespace txml {
             }
             return a->QueryIntValue(value);
         }
-
         /// See QueryIntAttribute()
         XMLError QueryUnsignedAttribute(const char *name, unsigned int *value) const {
             const XMLAttribute *a = FindAttribute(name);
@@ -1320,7 +1260,6 @@ namespace txml {
             }
             return a->QueryUnsignedValue(value);
         }
-
         /// See QueryIntAttribute()
         XMLError QueryBoolAttribute(const char *name, bool *value) const {
             const XMLAttribute *a = FindAttribute(name);
@@ -1329,7 +1268,6 @@ namespace txml {
             }
             return a->QueryBoolValue(value);
         }
-
         /// See QueryIntAttribute()
         XMLError QueryDoubleAttribute(const char *name, double *value) const {
             const XMLAttribute *a = FindAttribute(name);
@@ -1338,7 +1276,6 @@ namespace txml {
             }
             return a->QueryDoubleValue(value);
         }
-
         /// See QueryIntAttribute()
         XMLError QueryFloatAttribute(const char *name, float *value) const {
             const XMLAttribute *a = FindAttribute(name);
@@ -1390,31 +1327,26 @@ namespace txml {
             XMLAttribute *a = FindOrCreateAttribute(name);
             a->SetAttribute(value);
         }
-
         /// Sets the named attribute to value.
         void SetAttribute(const char *name, int value) {
             XMLAttribute *a = FindOrCreateAttribute(name);
             a->SetAttribute(value);
         }
-
         /// Sets the named attribute to value.
         void SetAttribute(const char *name, unsigned value) {
             XMLAttribute *a = FindOrCreateAttribute(name);
             a->SetAttribute(value);
         }
-
         /// Sets the named attribute to value.
         void SetAttribute(const char *name, bool value) {
             XMLAttribute *a = FindOrCreateAttribute(name);
             a->SetAttribute(value);
         }
-
         /// Sets the named attribute to value.
         void SetAttribute(const char *name, double value) {
             XMLAttribute *a = FindOrCreateAttribute(name);
             a->SetAttribute(value);
         }
-
         /// Sets the named attribute to value.
         void SetAttribute(const char *name, float value) {
             XMLAttribute *a = FindOrCreateAttribute(name);
@@ -1430,7 +1362,6 @@ namespace txml {
         const XMLAttribute *FirstAttribute() const {
             return _rootAttribute;
         }
-
         /// Query a specific attribute in the list.
         const XMLAttribute *FindAttribute(const char *name) const;
 
@@ -1490,19 +1421,14 @@ namespace txml {
             @endverbatim
         */
         void SetText(const char *inText);
-
         /// Convenience method for setting text inside and element. See SetText() for important limitations.
         void SetText(int value);
-
         /// Convenience method for setting text inside and element. See SetText() for important limitations.
         void SetText(unsigned value);
-
         /// Convenience method for setting text inside and element. See SetText() for important limitations.
         void SetText(bool value);
-
         /// Convenience method for setting text inside and element. See SetText() for important limitations.
         void SetText(double value);
-
         /// Convenience method for setting text inside and element. See SetText() for important limitations.
         void SetText(float value);
 
@@ -1529,16 +1455,12 @@ namespace txml {
                      to the requested type, and XML_NO_TEXT_NODE if there is no child text to query.
         */
         XMLError QueryIntText(int *ival) const;
-
         /// See QueryIntText()
         XMLError QueryUnsignedText(unsigned *uval) const;
-
         /// See QueryIntText()
         XMLError QueryBoolText(bool *bval) const;
-
         /// See QueryIntText()
         XMLError QueryDoubleText(double *dval) const;
-
         /// See QueryIntText()
         XMLError QueryFloatText(float *fval) const;
 
@@ -1548,7 +1470,6 @@ namespace txml {
             CLOSED,        // <foo/>
             CLOSING        // </foo>
         };
-
         int ClosingType() const {
             return _closingType;
         }
@@ -1562,7 +1483,6 @@ namespace txml {
 
     private:
         XMLElement(XMLDocument *doc);
-
         virtual ~XMLElement();
 
         XMLElement(const XMLElement &);    // not supported
@@ -1573,7 +1493,6 @@ namespace txml {
         }
 
         XMLAttribute *FindOrCreateAttribute(const char *name);
-
         //void LinkAttribute( XMLAttribute* attrib );
         char *ParseAttributes(char *p);
 
@@ -1603,11 +1522,9 @@ namespace txml {
 */
     class TINYXML2_LIB XMLDocument : public XMLNode {
         friend class XMLElement;
-
     public:
         /// constructor
         XMLDocument(bool processEntities = true, Whitespace = PRESERVE_WHITESPACE);
-
         ~XMLDocument();
 
         virtual XMLDocument *ToDocument() {
@@ -1677,7 +1594,6 @@ namespace txml {
         bool HasBOM() const {
             return _writeBOM;
         }
-
         /** Sets whether to write the BOM when writing the file.
         */
         void SetBOM(bool useBOM) {
@@ -1718,21 +1634,18 @@ namespace txml {
             is managed by the Document.
         */
         XMLElement *NewElement(const char *name);
-
         /**
             Create a new Comment associated with
             this Document. The memory for the Comment
             is managed by the Document.
         */
         XMLComment *NewComment(const char *comment);
-
         /**
             Create a new Text associated with
             this Document. The memory for the Text
             is managed by the Document.
         */
         XMLText *NewText(const char *text);
-
         /**
             Create a new Declaration associated with
             this Document. The memory for the object
@@ -1744,7 +1657,6 @@ namespace txml {
             @endverbatim
         */
         XMLDeclaration *NewDeclaration(const char *text = 0);
-
         /**
             Create a new Unknown associated with
             this Document. The memory for the object
@@ -1764,7 +1676,6 @@ namespace txml {
         bool Error() const {
             return _errorID != XML_NO_ERROR;
         }
-
         /// Return the errorID.
         XMLError ErrorID() const {
             return _errorID;
@@ -1776,12 +1687,10 @@ namespace txml {
         const char *GetErrorStr1() const {
             return _errorStr1;
         }
-
         /// Return a possibly helpful secondary diagnostic location or string.
         const char *GetErrorStr2() const {
             return _errorStr2;
         }
-
         /// If there is an error, print it to stdout.
         void PrintError() const;
 
@@ -1875,17 +1784,14 @@ namespace txml {
         XMLHandle(XMLNode *node) {
             _node = node;
         }
-
         /// Create a handle from a node.
         XMLHandle(XMLNode &node) {
             _node = &node;
         }
-
         /// Copy constructor
         XMLHandle(const XMLHandle &ref) {
             _node = ref._node;
         }
-
         /// Assignment
         XMLHandle &operator=(const XMLHandle &ref) {
             _node = ref._node;
@@ -1896,37 +1802,30 @@ namespace txml {
         XMLHandle FirstChild() {
             return XMLHandle(_node ? _node->FirstChild() : 0);
         }
-
         /// Get the first child element of this handle.
         XMLHandle FirstChildElement(const char *value = 0) {
             return XMLHandle(_node ? _node->FirstChildElement(value) : 0);
         }
-
         /// Get the last child of this handle.
         XMLHandle LastChild() {
             return XMLHandle(_node ? _node->LastChild() : 0);
         }
-
         /// Get the last child element of this handle.
         XMLHandle LastChildElement(const char *_value = 0) {
             return XMLHandle(_node ? _node->LastChildElement(_value) : 0);
         }
-
         /// Get the previous sibling of this handle.
         XMLHandle PreviousSibling() {
             return XMLHandle(_node ? _node->PreviousSibling() : 0);
         }
-
         /// Get the previous sibling element of this handle.
         XMLHandle PreviousSiblingElement(const char *_value = 0) {
             return XMLHandle(_node ? _node->PreviousSiblingElement(_value) : 0);
         }
-
         /// Get the next sibling of this handle.
         XMLHandle NextSibling() {
             return XMLHandle(_node ? _node->NextSibling() : 0);
         }
-
         /// Get the next sibling element of this handle.
         XMLHandle NextSiblingElement(const char *_value = 0) {
             return XMLHandle(_node ? _node->NextSiblingElement(_value) : 0);
@@ -1936,22 +1835,18 @@ namespace txml {
         XMLNode *ToNode() {
             return _node;
         }
-
         /// Safe cast to XMLElement. This can return null.
         XMLElement *ToElement() {
             return ((_node == 0) ? 0 : _node->ToElement());
         }
-
         /// Safe cast to XMLText. This can return null.
         XMLText *ToText() {
             return ((_node == 0) ? 0 : _node->ToText());
         }
-
         /// Safe cast to XMLUnknown. This can return null.
         XMLUnknown *ToUnknown() {
             return ((_node == 0) ? 0 : _node->ToUnknown());
         }
-
         /// Safe cast to XMLDeclaration. This can return null.
         XMLDeclaration *ToDeclaration() {
             return ((_node == 0) ? 0 : _node->ToDeclaration());
@@ -2090,12 +1985,10 @@ namespace txml {
 
         /** If streaming, write the BOM and declaration. */
         void PushHeader(bool writeBOM, bool writeDeclaration);
-
         /** If streaming, start writing an element.
             The element must be closed with CloseElement()
         */
         void OpenElement(const char *name, bool compactMode = false);
-
         /// If streaming, add an attribute to an open element.
         void PushAttribute(const char *name, const char *value);
 
@@ -2106,25 +1999,19 @@ namespace txml {
         void PushAttribute(const char *name, bool value);
 
         void PushAttribute(const char *name, double value);
-
         /// If streaming, close the Element.
         virtual void CloseElement(bool compactMode = false);
 
         /// Add a text node.
         void PushText(const char *text, bool cdata = false);
-
         /// Add a text node from an integer.
         void PushText(int value);
-
         /// Add a text node from an unsigned.
         void PushText(unsigned value);
-
         /// Add a text node from a bool.
         void PushText(bool value);
-
         /// Add a text node from a float.
         void PushText(float value);
-
         /// Add a text node from a double.
         void PushText(double value);
 
@@ -2160,7 +2047,6 @@ namespace txml {
         const char *CStr() const {
             return _buffer.Mem();
         }
-
         /**
             If in print to memory mode, return the size
             of the XML file in memory. (Note the size returned
@@ -2169,7 +2055,6 @@ namespace txml {
         int CStrSize() const {
             return _buffer.Size();
         }
-
         /**
             If in print to memory mode, reset the buffer to the
             beginning.
@@ -2190,7 +2075,6 @@ namespace txml {
         void Print(const char *format, ...);
 
         void SealElementIfJustOpened();
-
         bool _elementJustOpened;
         DynArray<const char *, 10> _stack;
 
