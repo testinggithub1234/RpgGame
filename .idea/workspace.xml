@@ -11,12 +11,7 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="295f409c-5668-451c-a784-add94f661aca" name="Default" comment="Added XML map support">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine.cpp" afterPath="$PROJECT_DIR$/Engine.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Level.cpp" afterPath="$PROJECT_DIR$/Level.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Level.h" afterPath="$PROJECT_DIR$/Level.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser.cpp" afterPath="$PROJECT_DIR$/Parser.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parser.h" afterPath="$PROJECT_DIR$/Parser.h" />
+    <list default="true" id="295f409c-5668-451c-a784-add94f661aca" name="Default" comment="Improved Leve class">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="RpgGame.iws" />
@@ -42,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/Engine.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="85" selection-start-line="53" selection-start-column="85" selection-end-line="53" selection-end-column="85" />
+              <caret line="54" column="85" selection-start-line="54" selection-start-column="85" selection-end-line="54" selection-end-column="85" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -66,7 +61,7 @@
         <entry file="file://$PROJECT_DIR$/Level.h">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+              <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -514,7 +509,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429636255464</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Improved Leve class">
+      <created>1429643338534</created>
+      <option name="number" value="00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1429643338534</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -576,7 +577,8 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="First commit" />
     <MESSAGE value="Added XML map support" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added XML map support" />
+    <MESSAGE value="Improved Leve class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved Leve class" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -945,7 +947,7 @@
     <entry file="file://$PROJECT_DIR$/Engine.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="85" selection-start-line="53" selection-start-column="85" selection-end-line="53" selection-end-column="85" />
+          <caret line="54" column="85" selection-start-line="54" selection-start-column="85" selection-end-line="54" selection-end-column="85" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -971,7 +973,7 @@
     <entry file="file://$PROJECT_DIR$/Level.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+          <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
           <folding />
         </state>
       </provider>
