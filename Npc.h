@@ -3,22 +3,22 @@
 
 
 #include <SFML/Graphics.hpp>
+#include "Actor.h"
 
 class Npc : public sf::Drawable {
 public:
     Npc();
 
-    sf::FloatRect boundingBox;
+    void Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation);
 
-    void Init(sf::Vector2f pos, sf::Vector2f size, sf::Texture &texture);
+    void Movement();
 
     void Update();
 
 private:
-    sf::RectangleShape sprite;
-
-
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+
+    Actor actor;
 };
 
 

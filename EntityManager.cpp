@@ -22,7 +22,7 @@ void EntityManager::Update() {
 
 void EntityManager::addNpc(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
     Npc npc;
-    npc.Init(sf::Vector2f(pos.x * 32, pos.y * 32), size, texture.getTexture(texLocation));
+//    npc.Init(sf::Vector2f(pos.x * 32, pos.y * 32), size, texture.getTexture(texLocation));
     npcList.push_back(npc);
 }
 

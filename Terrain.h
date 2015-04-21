@@ -1,16 +1,16 @@
-#ifndef RPGGAME_TILEMAP_H
-#define RPGGAME_TILEMAP_H
+#ifndef RPGGAME_TERRAIN_H
+#define RPGGAME_TERRAIN_H
 
 #include "SFML/Graphics.hpp"
 #include "TextureManager.h"
 #include <vector>
 #include <string>
 
-class TileMap : public sf::Drawable {
+class Terrain : public sf::Drawable {
 public:
-    TileMap() { }
+    Terrain() { }
 
-    void Load(const std::string &tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width,
+    bool Load(const std::string &tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width,
               unsigned int height, sf::View cameraView);
 
     void setView(sf::View cameraView);
@@ -18,13 +18,9 @@ public:
 private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-    int width, height;
-
     sf::FloatRect screenRect;
-
-    TextureManager texture;
-    sf::View cameraView;
-    std::vector<sf::Sprite> sprites;
+    std::vector<sf::Vertex> m_vertices;
+    sf::Texture m_tileset;
 };
 
 

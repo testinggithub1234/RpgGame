@@ -3,12 +3,11 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "TileMap2.h"
 #include "Level.h"
 #include "Player.h"
 #include "EntityManager.h"
 #include "Collision.h"
-#include "TileMap.h"
+#include "Terrain.h"
 
 class Engine {
 public:
@@ -33,7 +32,7 @@ private:
 
     EntityManager entities;
 
-    TileMap2 map;
+    Terrain terrain;
 
     Level level;
 
@@ -44,8 +43,6 @@ private:
     sf::Clock frameClock;
 
     sf::Time frameTime;
-
-    bool keyPressed = false;
 };
 
 #endif //RPGGAME_ENGINE_H

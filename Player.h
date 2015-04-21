@@ -6,6 +6,7 @@
 #include "Npc.h"
 #include "AnimatedSprite.h"
 #include "TextureManager.h"
+#include "Actor.h"
 
 class Player : public sf::Drawable {
 public:
@@ -36,29 +37,7 @@ public:
 private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-    float speed = 70.f;
-
-    enum Movement {
-        up, down, right, left, null, isMoving
-    };
-    Movement move;
-
-    sf::Vector2f destination;
-
-    sf::Vector2f direction;
-
-    sf::Vector2f initPos;
-
-    sf::Time frameTime;
-
-    TextureManager texture;
-
-    Animation walkingAnimationDown;
-    Animation walkingAnimationUp;
-    Animation walkingAnimationLeft;
-    Animation walkingAnimationRight;
-    Animation *currentAnimation = &walkingAnimationDown;
-    AnimatedSprite animatedSprite;
+    Actor actor;
 };
 
 

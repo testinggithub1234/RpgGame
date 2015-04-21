@@ -14,7 +14,8 @@ bool Engine::Init() {
     window->setFramerateLimit(0);
 
     level.LoadLevel("level");
-    map.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height, window->getView());
+    terrain.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.map, level.width, level.height,
+                 window->getView());
 
     player.init(level.playerPos, sf::Vector2f(32, 32), "Resources/player.png");
     entities.Init();
@@ -25,14 +26,6 @@ bool Engine::Init() {
     playerView.setCenter(player.getPixelPosition());
 
     return !!window;
-}
-
-void Engine::RenderFrame() {
-    window->clear(sf::Color(64, 164, 223));///Don't forget to add a color
-    window->draw(map);
-    window->draw(entities);
-    window->draw(player);
-    window->display();
 }
 
 void Engine::ProcessInput() {
@@ -72,7 +65,14 @@ void Engine::Update() {
 
     playerView.setCenter(player.getPixelPosition());
     window->setView(playerView);
-    map.setView(window->getView());
+}
+
+void Engine::RenderFrame() {
+    window->clear(sf::Color(64, 164, 223));///Don't forget to add a color
+    window->draw(terrain);
+    window->draw(entities);
+    window->draw(player);
+    window->display();
 }
 
 void Engine::MainLoop() {
