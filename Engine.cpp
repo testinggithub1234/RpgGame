@@ -14,8 +14,7 @@ bool Engine::Init() {
     window->setFramerateLimit(0);
 
     level.LoadLevel("level");
-    terrain.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.getTerrain(), level.getSize().x,
-                 level.getSize().y,
+    terrain.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.getTerrain(), level.getSize().x, level.getSize().y,
                  window->getView());
 
     player.init(level.getPlayerPosition(), sf::Vector2f(32, 32), "Resources/player.png");

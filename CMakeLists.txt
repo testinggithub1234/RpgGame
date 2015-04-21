@@ -19,7 +19,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 
 # Define sources and executable
 set(EXECUTABLE_NAME "RpgGame")
-add_executable(RpgGame ${SOURCE_FILES} Engine.cpp Engine.h Level.cpp Level.h Player.cpp Player.h Fps.h Collision.h Npc.cpp Npc.h EntityManager.cpp EntityManager.h TextureManager.cpp TextureManager.h Animation.cpp Animation.h AnimatedSprite.cpp AnimatedSprite.h Collision.cpp Collision.h Terrain.cpp Terrain.h Actor.cpp Actor.h Parser.cpp Parser.h)
+add_executable(RpgGame ${SOURCE_FILES} Engine.cpp Engine.h Level.cpp Level.h Player.cpp Player.h Fps.h Collision.h Npc.cpp Npc.h EntityManager.cpp EntityManager.h TextureManager.cpp TextureManager.h Animation.cpp Animation.h AnimatedSprite.cpp AnimatedSprite.h Collision.cpp Collision.h TileMap.cpp TileMap.h Actor.cpp Actor.h Parser.cpp Parser.h)
 
 
 # Detect and add SFML

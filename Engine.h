@@ -7,7 +7,7 @@
 #include "Player.h"
 #include "EntityManager.h"
 #include "Collision.h"
-#include "Terrain.h"
+#include "TileMap.h"
 
 class Engine {
 public:
@@ -32,7 +32,7 @@ private:
 
     EntityManager entities;
 
-    Terrain terrain;
+    TileMap terrain;
 
     Level level;
 

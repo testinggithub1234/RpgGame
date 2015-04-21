@@ -1,7 +1,7 @@
 #include <iostream>
-#include "Terrain.h"
+#include "TileMap.h"
 
-bool Terrain::Load(const std::string &tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width,
+bool TileMap::Load(const std::string &tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width,
                    unsigned int height, sf::View view) {
     // load the tileset texture
     if (!m_tileset.loadFromFile(tileset)) {
@@ -45,14 +45,14 @@ bool Terrain::Load(const std::string &tileset, sf::Vector2u tileSize, std::vecto
 
 }
 
-void Terrain::setView(sf::View view) {
+void TileMap::setView(sf::View view) {
     sf::FloatRect initRect(sf::Vector2f(view.getCenter().x - (view.getSize().x) / 2,
                                         view.getCenter().y - (view.getSize().y) / 2),
                            view.getSize());
     screenRect = initRect;
 }
 
-void Terrain::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     states.texture = &m_tileset;
 
     target.draw(&m_vertices[0], m_vertices.size(), sf::PrimitiveType::Quads, states);

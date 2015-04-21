@@ -10,15 +10,10 @@ public:
     Level();
 
     void LoadLevel(std::string lev);
-
     std::vector<int> getTerrain();
-
     std::vector<bool> getSolidObjectsList();
-
     std::vector<int> getSecondLayer();
-
     sf::Vector2f getPlayerPosition();
-
     sf::Vector2f getSize();
 
 private:
