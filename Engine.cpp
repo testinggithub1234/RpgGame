@@ -17,6 +17,9 @@ bool Engine::Init() {
     terrain.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.getTerrain(), level.getSize().x, level.getSize().y,
                  window->getView());
 
+    secondLayer.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.getSecondLayer(), level.getSize().x, level.getSize().y,
+                     window->getView());
+
     player.init(level.getPlayerPosition(), sf::Vector2f(32, 32), "Resources/player.png");
     entities.Init();
 
@@ -70,6 +73,7 @@ void Engine::Update() {
 void Engine::RenderFrame() {
     window->clear(sf::Color(64, 164, 223));///Don't forget to add a color
     window->draw(terrain);
+    window->draw(secondLayer);
     window->draw(entities);
     window->draw(player);
     window->display();

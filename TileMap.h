@@ -23,5 +23,4 @@ private:
     sf::Texture m_tileset;
 };
 
-
 #endif //RPGGAME_TILEMAP_H

@@ -34,6 +34,8 @@ private:
 
     TileMap terrain;
 
+    TileMap secondLayer;
+
     Level level;
 
     Collision collision;
