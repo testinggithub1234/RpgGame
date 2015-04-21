@@ -7,7 +7,8 @@
 
 class Level {
 public:
-    std::vector<int> map;
+    std::vector<int> terrain;
+    std::vector<int> secondLayer;
     std::vector<bool> solidObjects;
 
     sf::Vector2f playerPos;///Players starting position
