@@ -3,25 +3,30 @@
 
 
 #include <SFML/Graphics.hpp>
+#include <bits/stl_list.h>
 #include "Npc.h"
 #include "TextureManager.h"
 
-class EntityManager: public sf::Drawable {
+class EntityManager : public sf::Drawable {
 public:
     EntityManager();
 
-    std::vector<Npc> npcList;
+    void update(sf::Time frameTime);
 
-    void Init();
+    void npcMovement();
 
-    void Update();
+    std::vector<sf::FloatRect> getNpcsGlobalBounds();
 
     void addNpc(sf::Vector2f pos, sf::Vector2f size, std::string texLocation);
-private:
-    TextureManager texture;
 
+private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
+    void updateBounds();
+
+    std::vector<Npc> npcList;
+    std::vector<sf::FloatRect> npcsBounds;
+    TextureManager texture;
 };
 
 

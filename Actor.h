@@ -9,7 +9,7 @@ class Actor : public sf::Drawable {
 public:
     Actor();
 
-    void init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation);
+    void init(sf::Vector2f pos, sf::Vector2f size, sf::Texture &texture);
 
     void addAnimationUp(int x, int y);
 
@@ -35,6 +35,8 @@ public:
 
     void stop();
 
+    bool isMoving();
+
     sf::Vector2f getPosition();
 
     sf::Vector2f getPixelPosition();
@@ -45,10 +47,14 @@ public:
 
     sf::FloatRect getGlobalBounds();
 
+    void draw(sf::RenderTarget &window);
+
 private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
     sf::Vector2f size;
+
+    int headSize;
 
     float speed = 70.f;
 
@@ -64,8 +70,6 @@ private:
     sf::Vector2f initPos;
 
     sf::Time frameTime;
-
-    TextureManager texture;
 
     Animation walkingAnimationDown;
     Animation walkingAnimationUp;

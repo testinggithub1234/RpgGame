@@ -778,7 +778,7 @@ namespace txml {
         //		</foo>
         //		<!-- comment -->
         //
-        // Where the closing element (/foo) *must* be the next thing after the opening
+        // Where the closing element (/foos) *must* be the next thing after the opening
         // element, and the names must match. BUT the tricky bit is that the closing
         // element will be read by the child.
         //

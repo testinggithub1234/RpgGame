@@ -7,18 +7,18 @@
 
 class Npc : public sf::Drawable {
 public:
-    Npc();
+    Npc(sf::Vector2f pos, sf::Vector2f size, sf::Texture &texture);
 
-    void Init(sf::Vector2f pos, sf::Vector2f size, std::string texLocation);
+    void movement();
 
-    void Movement();
+    void update(sf::Time frameTime);
 
-    void Update();
+    sf::FloatRect getGlobalBounds();
 
 private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-    Actor actor;
+    Actor *actor;
 };
 
 

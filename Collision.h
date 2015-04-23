@@ -8,8 +8,8 @@ class Collision {
 public:
     Collision();
 
-    bool isPlayerColliding(sf::Vector2f playerPos, sf::Vector2f destination, sf::Vector2f leveDimensions,
-                           std::vector<bool> solidObjects);
+    bool isPlayerColliding(sf::Vector2f destination, sf::Vector2f leveDimensions,
+                           std::vector<bool> solidObjects, sf::FloatRect playerBox, std::vector<sf::FloatRect> npcsBoxes);
 };
 
 

@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-class TileMap : public sf::Drawable {
+class TileMap : public sf::Drawable, sf::Transformable {
 public:
     TileMap() { }
 

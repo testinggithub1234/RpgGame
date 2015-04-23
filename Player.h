@@ -24,6 +24,8 @@ public:
 
     void stop();
 
+    bool isMoving();
+
     sf::Vector2f getPosition();
 
     sf::Vector2f getPixelPosition();
@@ -38,6 +40,7 @@ private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
     Actor actor;
+    TextureManager texture;
 };
 
 

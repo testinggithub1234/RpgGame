@@ -2,7 +2,6 @@
 #include "Fps.h"
 
 Engine::Engine() {
-
 }
 
 bool Engine::Init() {
@@ -14,19 +13,16 @@ bool Engine::Init() {
     window->setFramerateLimit(0);
 
     level.LoadLevel("level");
-    terrain.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.getTerrain(), level.getSize().x, level.getSize().y,
-                 window->getView());
 
-    secondLayer.Load("Resources/tileset.png", sf::Vector2u(32, 32), level.getSecondLayer(), level.getSize().x, level.getSize().y,
-                     window->getView());
+    map = Layer("Resources/map.png");
 
-    player.init(level.getPlayerPosition(), sf::Vector2f(32, 32), "Resources/player.png");
-    entities.Init();
-
-    // entities.addNpc(sf::Vector2f(3, 0), sf::Vector2f(32, 32), "Resources/policeNPC.png");
-
+    player.init(level.getPlayerPosition(), sf::Vector2f(32, 48), "Resources/player.png");
     playerView.reset(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
     playerView.setCenter(player.getPixelPosition());
+
+    map.setView(playerView);
+
+    entities.addNpc(sf::Vector2f(1, 1), sf::Vector2f(32, 48), "Resources/player.png");
 
     return !!window;
 }
@@ -49,31 +45,38 @@ void Engine::ProcessInput() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) or sf::Keyboard::isKeyPressed(sf::Keyboard::Down) or
         sf::Keyboard::isKeyPressed(sf::Keyboard::Left) or sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         player.execute();
+
     }
     else {
         player.stop();
     }
-    if (collision.isPlayerColliding(player.getPosition(), player.getDestination(),
-                                    sf::Vector2f(level.getSize().x, level.getSize().y),
-                                    level.getSolidObjectsList())) {
+    if (collision.isPlayerColliding(player.getDestination(), sf::Vector2f(level.getSize().x, level.getSize().y),
+                                    level.getSolidObjectsList(), player.getGlobalBounds(),
+                                    entities.getNpcsGlobalBounds())) {
         player.undoMovement();
     }
     player.movement();
+    entities.npcMovement();
     showFps();
 }
 
 void Engine::Update() {
     player.update(frameTime);
-    entities.Update();
+    entities.update(frameTime);
 
+    window->setView(window->getDefaultView());
     playerView.setCenter(player.getPixelPosition());
     window->setView(playerView);
+    if (player.isMoving()) {
+        map.setView(playerView);
+    }
 }
 
 void Engine::RenderFrame() {
     window->clear(sf::Color(64, 164, 223));///Don't forget to add a color
-    window->draw(terrain);
-    window->draw(secondLayer);
+    // window->draw(terrain);
+    // window->draw(secondLayer);
+    window->draw(map);
     window->draw(entities);
     window->draw(player);
     window->display();

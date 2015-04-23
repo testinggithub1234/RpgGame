@@ -8,6 +8,7 @@
 #include "EntityManager.h"
 #include "Collision.h"
 #include "TileMap.h"
+#include "Layer.h"
 
 class Engine {
 public:
@@ -29,6 +30,10 @@ private:
     void Update();
 
     Player player;
+
+    Layer map;
+
+    TextureManager texture;
 
     EntityManager entities;
 
