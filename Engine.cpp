@@ -56,6 +56,7 @@ void Engine::ProcessInput() {
         player.undoMovement();
     }
     player.movement();
+
     entities.npcMovement();
     showFps();
 }
