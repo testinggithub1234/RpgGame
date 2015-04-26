@@ -1,10 +1,10 @@
 #Change this if you need to target a specific CMake version
 cmake_minimum_required(VERSION 3.1)
-project(RpgGame)
+project(rpgGame)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "/home/andrei/ClionProjects/RpgGame/Binaries")
-set(SOURCE_FILES Main.cpp)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "/home/andrei/ClionProjects/Binaries/rpgGame")
+set(SOURCE_FILES main.cpp)
 
 if(CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE Debug)
@@ -18,8 +18,8 @@ set(myproject_VERSION_MINOR 0)
 include_directories("${PROJECT_BINARY_DIR}")
 
 # Define sources and executable
-set(EXECUTABLE_NAME "RpgGame")
-add_executable(RpgGame ${SOURCE_FILES} Engine.cpp Engine.h Level.cpp Level.h Player.cpp Player.h Fps.h Collision.h Npc.cpp Npc.h EntityManager.cpp EntityManager.h TextureManager.cpp TextureManager.h Animation.cpp Animation.h AnimatedSprite.cpp AnimatedSprite.h Collision.cpp Collision.h TileMap.cpp TileMap.h Actor.cpp Actor.h Parser.cpp Parser.h Layer.cpp Layer.h)
+set(EXECUTABLE_NAME "rpgGame")
+add_executable(rpgGame ${SOURCE_FILES} TileMap.h Engine.cpp Engine.h Level.cpp Level.h Player.cpp Player.h Fps.h Collision.h)
 
 
 # Detect and add SFML

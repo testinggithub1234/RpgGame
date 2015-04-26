@@ -9,7 +9,7 @@ Level::Level() {
 
 void Level::LoadLevel(std::string lev) {
     txml::XMLDocument doc;
-    doc.LoadFile("untitled.tmx");
+    doc.LoadFile("untitled2.tmx");
     txml::XMLElement *root = doc.FirstChildElement("map");
 
     root->QueryAttribute("width", &width);

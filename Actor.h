@@ -29,10 +29,6 @@ public:
 
     void moveLeft();
 
-
-
-
-
     void moveRight();
 
     void undoMovement();
