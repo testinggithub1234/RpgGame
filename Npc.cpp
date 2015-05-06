@@ -38,3 +38,6 @@ void Npc::movement() {
     actor->movement();
 }
 
+sf::Vector2f Npc::getPosition() {
+    return actor->getPosition();
+}

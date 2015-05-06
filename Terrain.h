@@ -4,11 +4,11 @@
 #include <SFML/Graphics.hpp>
 #include "TextureManager.h"
 
-class Layer : public sf::Drawable, sf::Transformable {
+class Terrain : public sf::Drawable, sf::Transformable {
 public:
-    Layer();
+    Terrain();
 
-    Layer(std::string texLoc);
+    Terrain(std::string texLoc);
 
     void setView(sf::View view);
 

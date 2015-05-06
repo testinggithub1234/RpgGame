@@ -10,8 +10,8 @@ class TileMap : public sf::Drawable, sf::Transformable {
 public:
     TileMap() { }
 
-    bool Load(const std::string &tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width,
-              unsigned int height, sf::View cameraView);
+    bool load(const std::string &tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width,
+              unsigned int height);
 
     void setView(sf::View cameraView);
 

@@ -8,7 +8,7 @@
 #include "EntityManager.h"
 #include "Collision.h"
 #include "TileMap.h"
-#include "Layer.h"
+#include "Terrain.h"
 
 class Engine {
 public:
@@ -29,21 +29,11 @@ private:
 
     void Update();
 
-    Player player;
-
-    Layer map;
-
     TextureManager texture;
 
     EntityManager entities;
 
-    TileMap terrain;
-
-    TileMap secondLayer;
-
     Level level;
-
-    Collision collision;
 
     sf::View playerView;
 

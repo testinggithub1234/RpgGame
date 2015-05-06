@@ -12,18 +12,21 @@ bool Engine::Init() {
     window->setVerticalSyncEnabled(false);
     window->setFramerateLimit(0);
 
-    level.LoadLevel("level");
+    level.LoadLevel("untitled.tmx");
 
-    map = Layer("Resources/map.png");
+    Collision collision;
+    collision.loadData(level.getSize(), level.getSolidObjectsList());
 
-    player.init(level.getPlayerPosition(), sf::Vector2f(32, 48), "Resources/player.png");
+    entities.loadData(collision, level.getSize());
+
+
     playerView.reset(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
-    playerView.setCenter(player.getPixelPosition());
+    playerView.setCenter(entities.player.getPixelPosition());
 
-    map.setView(playerView);
+    level.updateView(playerView);
 
     entities.addNpc(sf::Vector2f(1, 1), sf::Vector2f(32, 48), "Resources/player.png");
-
+    entities.addNpc(sf::Vector2f(2, 1), sf::Vector2f(32, 48), "Resources/player.png");
     return !!window;
 }
 
@@ -42,44 +45,26 @@ void Engine::ProcessInput() {
     }
     frameTime = frameClock.restart();
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) or sf::Keyboard::isKeyPressed(sf::Keyboard::Down) or
-        sf::Keyboard::isKeyPressed(sf::Keyboard::Left) or sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        player.execute();
-
-    }
-    else {
-        player.stop();
-    }
-    if (collision.isPlayerColliding(player.getDestination(), sf::Vector2f(level.getSize().x, level.getSize().y),
-                                    level.getSolidObjectsList(), player.getGlobalBounds(),
-                                    entities.getNpcsGlobalBounds())) {
-        player.undoMovement();
-    }
-    player.movement();
-
+    entities.playerExecute();
     entities.npcMovement();
     showFps();
 }
 
 void Engine::Update() {
-    player.update(frameTime);
     entities.update(frameTime);
 
     window->setView(window->getDefaultView());
-    playerView.setCenter(player.getPixelPosition());
+    playerView.setCenter(entities.player.getPixelPosition());
     window->setView(playerView);
-    if (player.isMoving()) {
-        map.setView(playerView);
+    if (entities.player.isMoving()) {
+       level.updateView(playerView);
     }
 }
 
 void Engine::RenderFrame() {
     window->clear(sf::Color(64, 164, 223));///Don't forget to add a color
-    // window->draw(terrain);
-    // window->draw(secondLayer);
-    window->draw(map);
+    window->draw(level);
     window->draw(entities);
-    window->draw(player);
     window->display();
 }
 

@@ -1,8 +1,8 @@
 #include <iostream>
 #include "TileMap.h"
 
-bool TileMap::Load(const std::string &tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width,
-                   unsigned int height, sf::View view) {
+bool TileMap::load(const std::string &tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width,
+                   unsigned int height) {
     // load the tileset texture
     if (!m_tileset.loadFromFile(tileset)) {
         std::cout << "GAME_ERROR: Image: " << tileset << " was not found. It is filled with an empty image.\n";
@@ -60,18 +60,6 @@ void TileMap::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
     target.draw(&m_vertices[0], m_vertices.size(), sf::PrimitiveType::Quads, states);
 
-    /*
-    sf::FloatRect rect;
-    for (int i = 0; i < m_vertices.size(); i += 4) {
-
-        rect.width = 32;
-        rect.height = 32;
-        rect.top = m_vertices[i].position.y;
-        rect.left = m_vertices[i].position.x;
-        if (rect.intersects(screenRect)) {
-            target.draw(&m_vertices[i], 4, sf::PrimitiveType::Quads, states);
-        }
-    }*/
 }
 
 

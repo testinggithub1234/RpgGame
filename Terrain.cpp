@@ -1,17 +1,17 @@
 #include <iostream>
-#include "Layer.h"
+#include "Terrain.h"
 
-Layer::Layer() {
+Terrain::Terrain() {
 
 }
 
-void Layer::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+void Terrain::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     states.transform = getTransform();
     states.texture = &texture->getTexture(texLocation);
     target.draw(&vertices[0], vertices.size(), sf::Quads, states);
 }
 
-void Layer::setView(sf::View view) {
+void Terrain::setView(sf::View view) {
     sf::FloatRect initRect(sf::Vector2f(view.getCenter().x - (view.getSize().x) / 2,
                                         view.getCenter().y - (view.getSize().y) / 2),
                            view.getSize());
@@ -46,7 +46,7 @@ void Layer::setView(sf::View view) {
             sf::Vertex(sf::Vector2f(x, 600 + y), sf::Vector2f(x, 600 + y)));
 }
 
-Layer::Layer(std::string texLoc) {
+Terrain::Terrain(std::string texLoc) {
     texture = new TextureManager();
     texLocation = texLoc;
     texture->getTexture(texLoc);

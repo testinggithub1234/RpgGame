@@ -6,10 +6,14 @@
 #include <bits/stl_list.h>
 #include "Npc.h"
 #include "TextureManager.h"
+#include "Player.h"
+#include "Collision.h"
 
 class EntityManager : public sf::Drawable {
 public:
     EntityManager();
+
+    void loadData(Collision collision, sf::Vector2f size);
 
     void update(sf::Time frameTime);
 
@@ -19,11 +23,22 @@ public:
 
     void addNpc(sf::Vector2f pos, sf::Vector2f size, std::string texLocation);
 
+    void playerExecute();
+
+    Player player;
+
 private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
     void updateBounds();
 
+    void updateDrawOrder();
+
+    void updatePlayerOrder();
+
+    int playerDrawOrder = 0;
+    Collision collision;
+    sf::Vector2f levelSize;
     std::vector<Npc> npcList;
     std::vector<sf::FloatRect> npcsBounds;
     TextureManager texture;

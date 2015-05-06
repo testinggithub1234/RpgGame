@@ -7,9 +7,11 @@
 class Collision {
 public:
     Collision();
-
-    bool isPlayerColliding(sf::Vector2f destination, sf::Vector2f leveDimensions,
-                           std::vector<bool> solidObjects, sf::FloatRect playerBox, std::vector<sf::FloatRect> npcsBoxes);
+    void loadData(sf::Vector2f leveDimensions, std::vector<bool> solidObjects);
+    bool isPlayerColliding(sf::Vector2f destination,  sf::FloatRect playerBox, std::vector<sf::FloatRect> npcsBoxes);
+private:
+    std::vector<bool> solidObjects;
+    sf::Vector2f levelDimensions;
 };
 
 

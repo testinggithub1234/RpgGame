@@ -4,12 +4,12 @@
 #include "Parser.h"
 
 Level::Level() {
-
+    terrain = Terrain("Resources/map.png");
 }
 
-void Level::LoadLevel(std::string lev) {
+void Level::LoadLevel(char *lev) {
     txml::XMLDocument doc;
-    doc.LoadFile("untitled2.tmx");
+    doc.LoadFile(lev);
     txml::XMLElement *root = doc.FirstChildElement("map");
 
     root->QueryAttribute("width", &width);
@@ -18,82 +18,66 @@ void Level::LoadLevel(std::string lev) {
     playerPos.x = 0;// Pixels
     playerPos.y = -16;
 
-    //Terrain
-    txml::XMLElement *data = root->FirstChildElement("layer")->FirstChildElement("data");
-    const char *a = data->GetText();
-    char *str = (char *) a;
-    char *pch = strtok(str, " ,.-");
+    txml::XMLElement *pListElement = root->FirstChildElement("layer");
+    std::vector<std::vector<int> > layerList;
+    std::vector<int> vec;
 
-    while (pch != NULL) {
-        int i;
-        i = atoi(pch);
-        terrain.push_back(i - 1);
-        pch = strtok(NULL, " ,");
-    }
+    while (pListElement != nullptr) {
+        txml::XMLElement *data = pListElement->FirstChildElement("data");
+        std::string check = pListElement->Attribute("name");
 
-    //Second Layer
-    data = root->FirstChildElement("layer")->NextSiblingElement("layer");
-    std::string check = data->Attribute("name");
-    if (check == "SecondLayer") {
-        data = data->FirstChildElement("data");
-        a = data->GetText();
-        str = (char *) a;
-        pch = strtok(str, " ,.-");
-
+        const char *a = data->GetText();
+        char *str = (char *) a;
+        char *pch = strtok(str, " ,.-");
+        vec.clear();
         while (pch != NULL) {
             int i;
             i = atoi(pch);
-            secondLayer.push_back(i - 1);
+            vec.push_back(i - 1);
             pch = strtok(NULL, " ,");
         }
+        layerList.push_back(vec);
+        TileMap tile;
+        tile.load("Resources/tileset.png", sf::Vector2u(32, 32), vec, width, height);
+
+        if (check == "under") {
+            underPlayer.push_back(tile);
+        }
+        else if (check == "over") {
+            overPlayer.push_back(tile);
+        }
+
+        pListElement = pListElement->NextSiblingElement("layer");
     }
 
-    //Solid objects list
     std::vector<int> solidObjectsList;
 
     txml::XMLElement *solidObj = root->FirstChildElement("tileset")->FirstChildElement("tile");
     while (solidObj != nullptr) {
-        check = solidObj->FirstChildElement("properties")->FirstChildElement("property")->Attribute(
+        std::string check = solidObj->FirstChildElement("properties")->FirstChildElement("property")->Attribute(
                 "value");
         if (check == "Solid") {
             int val;
             solidObj->QueryAttribute("id", &val);
-            std::cout << val << ' ';
             solidObjectsList.push_back(val);
         }
         solidObj = solidObj->NextSiblingElement("tile");
     }
 
     solidObjects.resize((unsigned long) (width * height));
-
-    for (int i = 0; i < terrain.size(); i++) {
+    for (int i = 0; i < solidObjects.size(); i++) {
         solidObjects[i] = false;
-        for (int j = 0; j < solidObjectsList.size(); j++) {
-            if (terrain[i] == solidObjectsList[j]) {
-                solidObjects[i] = true;
-                break;
+    }
+
+    for (int i = 0; i < solidObjectsList.size(); i++) {
+        for (int j = 0; j < layerList.size(); j++) {
+            for (int k = 0; k < layerList[j].size(); k++) {
+                if (layerList[j][k] == solidObjectsList[i]) {
+                    solidObjects[k] = true;
+                }
             }
         }
     }
-
-    for (int i = 0; i < secondLayer.size(); i++) {
-        for (int j = 0; j < solidObjectsList.size(); j++) {
-            if (secondLayer[i] == solidObjectsList[j]) {
-                solidObjects[i] = true;
-                break;
-            }
-        }
-    }
-
-    solidObjectsList.clear();
-}
-
-std::vector<int> Level::getTerrain() {
-    return terrain;
-}
-
-std::vector<int> Level::getSecondLayer() {
-    return secondLayer;
 }
 
 sf::Vector2f Level::getPlayerPosition() {
@@ -108,3 +92,13 @@ sf::Vector2f Level::getSize() {
     return sf::Vector2f(width, height);
 }
 
+void Level::updateView(sf::View view) {
+    terrain.setView(view);
+}
+
+void Level::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    target.draw(terrain);
+    for (int i = 0; i < underPlayer.size(); i++) {
+        target.draw(underPlayer[i]);
+    }
+}

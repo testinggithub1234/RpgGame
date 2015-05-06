@@ -7,8 +7,7 @@ Collision::Collision() {
 
 }
 
-bool Collision::isPlayerColliding(sf::Vector2f destination, sf::Vector2f levelDimensions,
-                                  std::vector<bool> solidObjects, sf::FloatRect playerBox, std::vector<sf::FloatRect> npcsBoxes) {
+bool Collision::isPlayerColliding(sf::Vector2f destination, sf::FloatRect playerBox, std::vector<sf::FloatRect> npcsBoxes) {
     if (destination.x < 0 or destination.y < 0 or destination.x > levelDimensions.x - 1 or
         destination.y > levelDimensions.y - 1) {
         return true;
@@ -28,4 +27,9 @@ bool Collision::isPlayerColliding(sf::Vector2f destination, sf::Vector2f levelDi
     }
 
     return false;
+}
+
+void Collision::loadData(sf::Vector2f levelDimensions, std::vector<bool> solidObjects) {
+    this->levelDimensions = levelDimensions;
+    this->solidObjects = solidObjects;
 }

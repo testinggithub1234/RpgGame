@@ -1418,6 +1418,7 @@ namespace txml {
             return;
         }
         MemPool *pool = attribute->_memPool;
+
         attribute->~XMLAttribute();
         pool->Free(attribute);
     }

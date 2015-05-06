@@ -11,6 +11,8 @@ public:
 
     void movement();
 
+    sf::Vector2f getPosition();
+
     void update(sf::Time frameTime);
 
     sf::FloatRect getGlobalBounds();

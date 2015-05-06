@@ -4,24 +4,34 @@
 #include <vector>
 #include <string>
 #include <SFML/System/Vector2.hpp>
+#include "Terrain.h"
+#include "TileMap.h"
 
-class Level {
+class Level : public sf::Drawable, sf::Transformable {
 public:
     Level();
 
-    void LoadLevel(std::string lev);
-    std::vector<int> getTerrain();
+    void LoadLevel(char* lev);
+
     std::vector<bool> getSolidObjectsList();
-    std::vector<int> getSecondLayer();
+
     sf::Vector2f getPlayerPosition();
+
     sf::Vector2f getSize();
 
+    void updateView(sf::View view);
+
 private:
-    std::vector<int> terrain;
-    std::vector<int> secondLayer;
     std::vector<bool> solidObjects;
-    sf::Vector2f playerPos;///Players starting position
+    sf::Vector2f playerPos;
+    ///Players starting position
     float width, height;
+
+    Terrain terrain;
+    std::vector<TileMap> underPlayer;
+    std::vector<TileMap> overPlayer;
+
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
 
 #endif //RPGGAME_LEVEL_H
