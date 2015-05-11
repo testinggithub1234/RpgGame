@@ -3,12 +3,9 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "Level.h"
-#include "Player.h"
-#include "EntityManager.h"
-#include "Collision.h"
-#include "TileMap.h"
-#include "Terrain.h"
+#include "Manager/TextureManager.h"
+#include "Manager/EntityManager.h"
+#include "Map/Level.h"
 
 class Engine {
 public:

@@ -1,6 +1,6 @@
+
 #include <iostream>
 #include "EntityManager.h"
-#include <algorithm>
 
 EntityManager::EntityManager() {
     player.init(sf::Vector2f(0, 16), sf::Vector2f(32, 48), "Resources/player.png");

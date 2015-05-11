@@ -1,13 +1,12 @@
 #ifndef RPGGAME_ENTITYMANAGER_H
 #define RPGGAME_ENTITYMANAGER_H
 
-
 #include <SFML/Graphics.hpp>
 #include <bits/stl_list.h>
-#include "Npc.h"
 #include "TextureManager.h"
-#include "Player.h"
-#include "Collision.h"
+#include "../Collision/Collision.h"
+#include "../Player/Player.h"
+#include "../Map/Npc/Npc.h"
 
 class EntityManager : public sf::Drawable {
 public:

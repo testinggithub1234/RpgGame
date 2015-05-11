@@ -19,6 +19,8 @@ public:
 
     sf::Vector2f getSize();
 
+    void drawOver(sf::RenderWindow &target);
+
     void updateView(sf::View view);
 
 private:

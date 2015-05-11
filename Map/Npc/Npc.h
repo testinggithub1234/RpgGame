@@ -1,9 +1,8 @@
 #ifndef RPGGAME_NPC_H
 #define RPGGAME_NPC_H
 
-
 #include <SFML/Graphics.hpp>
-#include "Actor.h"
+#include "../../Actor/Actor.h"
 
 class Npc : public sf::Drawable {
 public:

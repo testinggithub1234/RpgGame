@@ -1,5 +1,5 @@
 #include "Engine.h"
-#include "Fps.h"
+#include "Utilities/Fps.h"
 
 Engine::Engine() {
 }
@@ -12,7 +12,9 @@ bool Engine::Init() {
     window->setVerticalSyncEnabled(false);
     window->setFramerateLimit(0);
 
-    level.LoadLevel("untitled.tmx");
+    char *a = "untitled2.tmx";
+
+    level.LoadLevel(a);
 
     Collision collision;
     collision.loadData(level.getSize(), level.getSolidObjectsList());
@@ -43,14 +45,13 @@ void Engine::ProcessInput() {
             }
         }
     }
-    frameTime = frameClock.restart();
-
     entities.playerExecute();
     entities.npcMovement();
     showFps();
 }
 
 void Engine::Update() {
+    frameTime = frameClock.restart();
     entities.update(frameTime);
 
     window->setView(window->getDefaultView());
@@ -65,6 +66,7 @@ void Engine::RenderFrame() {
     window->clear(sf::Color(64, 164, 223));///Don't forget to add a color
     window->draw(level);
     window->draw(entities);
+    level.drawOver(*window);
     window->display();
 }
 

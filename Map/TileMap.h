@@ -2,7 +2,6 @@
 #define RPGGAME_TERRAIN_H
 
 #include "SFML/Graphics.hpp"
-#include "TextureManager.h"
 #include <vector>
 #include <string>
 

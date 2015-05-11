@@ -2,8 +2,8 @@
 #define RPGGAME_ACTOR_H
 
 #include "SFML/Graphics.hpp"
-#include "TextureManager.h"
-#include "AnimatedSprite.h"
+#include "../Animation/Animation.h"
+#include "../Animation/AnimatedSprite.h"
 
 class Actor : public sf::Drawable {
 public:

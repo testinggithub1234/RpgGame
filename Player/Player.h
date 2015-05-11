@@ -2,11 +2,8 @@
 #define RPGGAME_PLAYER_H
 
 #include <SFML/Graphics.hpp>
-#include "Level.h"
-#include "Npc.h"
-#include "AnimatedSprite.h"
-#include "TextureManager.h"
-#include "Actor.h"
+#include "../Manager/TextureManager.h"
+#include "../Actor/Actor.h"
 
 class Player : public sf::Drawable {
 public:

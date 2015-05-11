@@ -1,7 +1,7 @@
 #include "Level.h"
 #include <fstream>
 #include <iostream>
-#include "Parser.h"
+#include "../Utilities/Parser.h"
 
 Level::Level() {
     terrain = Terrain("Resources/map.png");
@@ -97,8 +97,14 @@ void Level::updateView(sf::View view) {
 }
 
 void Level::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    target.draw(terrain);
+   // target.draw(terrain);
     for (int i = 0; i < underPlayer.size(); i++) {
         target.draw(underPlayer[i]);
+    }
+}
+
+void Level::drawOver(sf::RenderWindow &target) {
+    for (int i = 0; i < overPlayer.size(); i++) {
+        target.draw(overPlayer[i]);
     }
 }
