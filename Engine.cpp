@@ -10,7 +10,7 @@ bool Engine::Init() {
 
     window = initWindow;
     window->setVerticalSyncEnabled(false);
-    window->setFramerateLimit(0);
+    window->setFramerateLimit(120);
 
     char *a = "untitled2.tmx";
 

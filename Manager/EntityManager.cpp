@@ -6,6 +6,17 @@ EntityManager::EntityManager() {
     player.init(sf::Vector2f(0, 16), sf::Vector2f(32, 48), "Resources/player.png");
 }
 
+
+void EntityManager::update(sf::Time frameTime) {
+    for (auto it = npcList.begin(); it != npcList.end(); ++it) {
+        it->update(frameTime);
+    }
+
+    player.update(frameTime);
+    updateDrawOrder();
+    updateBounds();
+}
+
 void EntityManager::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     for (int i = 0; i < npcList.size(); i++) {
         if (i == playerDrawOrder) {
@@ -16,17 +27,6 @@ void EntityManager::draw(sf::RenderTarget &target, sf::RenderStates states) cons
     if (playerDrawOrder == -1) {
         target.draw(player);
     }
-}
-
-void EntityManager::update(sf::Time frameTime) {
-    for (auto it = npcList.begin(); it != npcList.end(); ++it) {
-        it->update(frameTime);
-    }
-
-    player.update(frameTime);
-    updateDrawOrder();
-
-    updateBounds();
 }
 
 void EntityManager::addNpc(sf::Vector2f pos, sf::Vector2f size, std::string texLocation) {
@@ -55,7 +55,6 @@ void EntityManager::playerExecute() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) or sf::Keyboard::isKeyPressed(sf::Keyboard::Down) or
         sf::Keyboard::isKeyPressed(sf::Keyboard::Left) or sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         player.execute();
-
     }
     else {
         player.stop();
@@ -92,3 +91,4 @@ void EntityManager::updatePlayerOrder() {
         }
     }
 }
+

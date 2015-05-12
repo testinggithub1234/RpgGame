@@ -19,7 +19,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 
 # Define sources and executable
 set(EXECUTABLE_NAME "RpgGame")
-add_executable(RpgGame ${SOURCE_FILES} Engine.cpp Engine.h Map/Level.cpp Map/Level.h Player/Player.cpp Player/Player.h Utilities/Fps.h Collision/Collision.h Map/Npc/Npc.cpp Map/Npc/Npc.h Manager/EntityManager.cpp Manager/EntityManager.h Manager/TextureManager.cpp Manager/TextureManager.h Animation/Animation.cpp Animation/Animation.h Animation/AnimatedSprite.cpp Animation/AnimatedSprite.h Collision/Collision.cpp Collision/Collision.h Map/TileMap.cpp Map/TileMap.h Actor/Actor.cpp Actor/Actor.h Utilities/Parser.cpp Utilities/Parser.h Map/Terrain.cpp Map/Terrain.h)
+add_executable(RpgGame ${SOURCE_FILES} Engine.cpp Engine.h Map/Level.cpp Map/Level.h Player/Player.cpp Player/Player.h Utilities/Fps.h Collision/Collision.h Map/Npc/Npc.cpp Map/Npc/Npc.h Manager/EntityManager.cpp Manager/EntityManager.h Manager/TextureManager.cpp Manager/TextureManager.h Animation/Animation.cpp Animation/Animation.h Animation/AnimatedSprite.cpp Animation/AnimatedSprite.h Collision/Collision.cpp Collision/Collision.h Map/TileMap.cpp Map/TileMap.h Actor/Actor.cpp Actor/Actor.h Utilities/Parser.cpp Utilities/Parser.h Map/Terrain.cpp Map/Terrain.h Map/Portal.cpp Map/Portal.h)
 
 
 # Detect and add SFML
