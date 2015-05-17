@@ -20,7 +20,7 @@ sf::Texture &TextureManager::getTexture(const std::string &texLocation) {
         return  textures[texLocation];
     }
 
-    std::cout << "GAME_ERROR: Image: "<< texLocation << " was not found. It is filled with an empty image.\n";
+    std::cout << "GAME_ERROR: Image: \""<< texLocation <<"\" was not found. It is filled with an empty image.\n";
     textures[texLocation] = texture;
 
     return textures[texLocation];

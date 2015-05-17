@@ -344,7 +344,8 @@ if (NOT SFML_FOUND)
     if(SFML_FIND_REQUIRED)
         # fatal error
         message(FATAL_ERROR ${FIND_SFML_ERROR})
-    elseif(NOT SFML_FIND_QUIETLY)
+    elseif(NOT SFML
+    _FIND_QUIETLY)
         # error but continue
         message("${FIND_SFML_ERROR}")
     endif()

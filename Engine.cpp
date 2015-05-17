@@ -1,7 +1,9 @@
+#include <string.h>
 #include "Engine.h"
 #include "Utilities/Fps.h"
 
 Engine::Engine() {
+
 }
 
 bool Engine::Init() {
@@ -12,23 +14,14 @@ bool Engine::Init() {
     window->setVerticalSyncEnabled(false);
     window->setFramerateLimit(120);
 
-    char *a = "untitled2.tmx";
-
-    level.LoadLevel(a);
-
-    Collision collision;
-    collision.loadData(level.getSize(), level.getSolidObjectsList());
-
-    entities.loadData(collision, level.getSize());
-
-
     playerView.reset(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
-    playerView.setCenter(entities.player.getPixelPosition());
 
-    level.updateView(playerView);
+    levelLoader.setData(level, entities);
 
-    entities.addNpc(sf::Vector2f(1, 1), sf::Vector2f(32, 48), "Resources/player.png");
-    entities.addNpc(sf::Vector2f(2, 1), sf::Vector2f(32, 48), "Resources/player.png");
+    levelLoader.setLevel("untitled2.tmx");
+
+    levelLoader.start();
+
     return !!window;
 }
 
@@ -63,18 +56,22 @@ void Engine::Update() {
 }
 
 void Engine::RenderFrame() {
-    window->clear(sf::Color(64, 164, 223));///Don't forget to add a color
-    window->draw(level);
-    window->draw(entities);
-    level.drawOver(*window);
-    window->display();
+        window->clear(sf::Color(64, 164, 223));///Don't forget to add a color
+        window->draw(level);
+        window->draw(entities);
+        level.drawOver(*window);
+        window->display();
 }
 
 void Engine::MainLoop() {
     while (window->isOpen()) {
-        ProcessInput();
-        Update();
-        RenderFrame();
+        if(!levelLoader.isLevelLoading()) {
+            ProcessInput();
+            Update();
+            RenderFrame();
+        }else{
+            //renderloadingscreen
+        }
     }
 }
 

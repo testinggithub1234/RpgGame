@@ -4,7 +4,7 @@
 #include "../Utilities/Parser.h"
 
 Level::Level() {
-    terrain = Terrain("Resources/map.png");
+   // terrain = Terrain("Resources/map.png");
 }
 
 void Level::LoadLevel(char *lev) {
@@ -16,7 +16,7 @@ void Level::LoadLevel(char *lev) {
     root->QueryAttribute("height", &height);
 
     playerPos.x = 0;// Pixels
-    playerPos.y = -16;
+    playerPos.y = 48;
 
     txml::XMLElement *pListElement = root->FirstChildElement("layer");
     std::vector<std::vector<int> > layerList;
@@ -88,6 +88,10 @@ std::vector<bool> Level::getSolidObjectsList() {
     return solidObjects;
 }
 
+std::vector<Portal> Level::getPortals() {
+    return portals;
+}
+
 sf::Vector2f Level::getSize() {
     return sf::Vector2f(width, height);
 }
@@ -108,3 +112,4 @@ void Level::drawOver(sf::RenderWindow &target) {
         target.draw(overPlayer[i]);
     }
 }
+

@@ -138,6 +138,10 @@ bool Actor::isMoving() {
     return move == ISMOVING;
 }
 
+void Actor::setPosition(sf::Vector2f pos) {
+    animatedSprite.setPosition(pos);
+}
+
 sf::Vector2f Actor::getPosition() {
     return sf::Vector2f(animatedSprite.getPosition().x / getSize().x,
                         (animatedSprite.getPosition().y + headSize) / getSize().y);
@@ -169,3 +173,4 @@ void Actor::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 void Actor::draw(sf::RenderTarget &window) {
     window.draw(animatedSprite);
 }
+

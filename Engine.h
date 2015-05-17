@@ -2,15 +2,16 @@
 #define RPGGAME_ENGINE_H
 
 #include <memory>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include "Manager/TextureManager.h"
 #include "Manager/EntityManager.h"
 #include "Map/Level.h"
+#include "Manager/LevelLoader.h"
 
 class Engine {
 public:
     Engine();
-
     void Go();
 
 private:
@@ -31,6 +32,8 @@ private:
     EntityManager entities;
 
     Level level;
+
+    LevelLoader levelLoader;
 
     sf::View playerView;
 

@@ -81,3 +81,7 @@ sf::Vector2f Player::getDestination() {
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(actor);
 }
+
+void Player::setPosition(sf::Vector2f pos) {
+    actor.setPosition(pos);
+}
